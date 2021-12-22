@@ -1,14 +1,63 @@
-// Each #kernel tells which function to compile; you can have many kernels
-#pragma kernel CSMain
+#pragma kernel NoiseGenerator
+#include "noiseSimplex.cginc"
 
-// Create a RenderTexture with enableRandomWrite flag and set it
-// with cs.SetTexture
-RWTexture2D<float4> Result;
+RWTexture2D<float4> NoiseMap;
+
+int randSeed1;
+int randSeed2;
+int octaves;
+int scale;
+float gain;
+float lacunarity;
+float width;
+float height;
+
+
+float remap(float v, float minOld, float maxOld, float minNew, float maxNew) {
+    return saturate(minNew + (v-minOld) * (maxNew - minNew) / (maxOld-minOld));
+}
+
+float3 latLongToPoint(float latitude, float longitude) {
+
+    float y = sin(latitude);
+    float r = cos(latitude); // radius of 2d circle cut through sphere at 'y'
+    float x = sin(longitude) * r; 
+    float z = -cos(longitude) * r;
+
+    return float3(x, y, z);
+}
+
+float fbm(float3 x)
+{
+    float value = 0.0;
+    float amplitude = 1;
+    float frequency = 1;
+    
+    for (int i = 0; i < octaves; i++) {
+        
+        value += amplitude * snoise(frequency * x);
+        x *= 2.;
+        amplitude *= gain;
+        frequency *= lacunarity;
+    }
+    return value;
+}
 
 [numthreads(8,8,1)]
-void CSMain (uint3 id : SV_DispatchThreadID)
+void NoiseGenerator (uint3 id : SV_DispatchThreadID)
 {
-    // TODO: insert actual code here!
+    // this generate main height
+    float p = 3.14159265358979323846;
+    float _x = remap(id.x, 0, width, 0, 1);
+    float _y = remap(id.y, 0, height, 0, 1);
 
-    Result[id.xy] = float4(id.x & id.y, (id.x & 15)/15.0, (id.y & 15)/15.0, 0.0);
+    float3 v = latLongToPoint((_y * p) - p / 2, (_x * p * 2) - p) * 2048;
+    float3 mainV = float3(v.x + randSeed1, v.y + randSeed1, v.z + randSeed1);
+    float3 subV = float3(v.x + randSeed2 + 100, v.y + randSeed2 + 100, v.z + randSeed2 + 100);
+    
+    float h = (fbm(mainV / scale) + 1) / 2;
+    float subH = (fbm(subV / (scale / 2)) + 1) / 2;
+
+    float value = h + subH;
+    NoiseMap[id.xy] = float4(value, value, value, value);
 }
