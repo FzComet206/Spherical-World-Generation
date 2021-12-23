@@ -1,14 +1,15 @@
 using System.Collections.Generic;
+using UnityEngine;
 
 public class Node
 {
-    public int index;
+    public Vector3 position;
     public int active;
     
-    public Node(int index, float value, float threshold0, float threshold1)
+    public Node(Vector3 position, float value, float threshold)
     {
-        active = value >= threshold0 && value <= threshold1 ? 1 : 0;
-        this.index = index;
+        active = value >= threshold? 1 : 0;
+        this.position = position;
     }
 }
 
@@ -30,178 +31,200 @@ public class Square
     }
 
     // triangulate update the triangle arr and return new triangle index
-    public void Triangulate(List<int> triangleList)
+    public int March(List<Vector3> vertexList, List<int> triangleList, int vertexCount)
     {
         int config = bottomLeft.active * 1 + bottomRight.active * 2 + topLeft.active * 4 + topRight.active * 8;
 
         switch (config)
         {
+            case 0:
+                return vertexCount;
+            
+            case 15:
+
+                vertexList.Add(topLeft.position);
+                vertexList.Add(bottomRight.position);
+                vertexList.Add(bottomLeft.position);
+
+                vertexList.Add(topLeft.position);
+                vertexList.Add(topRight.position);
+                vertexList.Add(bottomRight.position);
+
+                return vertexCount + 6;
+            
             case 1:
-                triangleList.Add(centerLeft.index);
-                triangleList.Add(centerBot.index);
-                triangleList.Add(centerLeft.index);
-                break;
+                vertexList.Add(centerLeft.position);
+                vertexList.Add(centerBot.position);
+                vertexList.Add(centerLeft.position);
+                
+                return vertexCount + 3;
 
             case 2:
-                triangleList.Add(centerBot.index);
-                triangleList.Add(centerRight.index);
-                triangleList.Add(bottomRight.index);
-                break;
+                vertexList.Add(centerBot.position);
+                vertexList.Add(centerRight.position);
+                vertexList.Add(bottomRight.position);
+
+                return vertexCount + 3;
 
             case 3:
-                triangleList.Add(centerLeft.index);
-                triangleList.Add(bottomRight.index);
-                triangleList.Add(bottomLeft.index);
+                vertexList.Add(centerLeft.position);
+                vertexList.Add(bottomRight.position);
+                vertexList.Add(bottomLeft.position);
 
-                triangleList.Add(centerLeft.index);
-                triangleList.Add(centerRight.index);
-                triangleList.Add(bottomRight.index);
-                break;
+                vertexList.Add(centerLeft.position);
+                vertexList.Add(centerRight.position);
+                vertexList.Add(bottomRight.position);
+                
+                return vertexCount + 6;
 
             case 4:
-                triangleList.Add(centerTop.index);
-                triangleList.Add(topRight.index);
-                triangleList.Add(centerRight.index);
-                break;
+                vertexList.Add(centerTop.position);
+                vertexList.Add(topRight.position);
+                vertexList.Add(centerRight.position);
+
+                return vertexCount + 3;
 
             case 5:
-                triangleList.Add(centerLeft.index);
-                triangleList.Add(centerBot.index);
-                triangleList.Add(bottomLeft.index);
+                vertexList.Add(centerLeft.position);
+                vertexList.Add(centerBot.position);
+                vertexList.Add(bottomLeft.position);
+                
+                vertexList.Add(centerLeft.position);
+                vertexList.Add(centerTop.position);
+                vertexList.Add(centerBot.position);
+                
+                vertexList.Add(centerTop.position);
+                vertexList.Add(centerRight.position);
+                vertexList.Add(centerBot.position);
+                
+                vertexList.Add(centerTop.position);
+                vertexList.Add(topRight.position);
+                vertexList.Add(centerRight.position);
 
-                triangleList.Add(centerLeft.index);
-                triangleList.Add(centerTop.index);
-                triangleList.Add(centerBot.index);
-
-                triangleList.Add(centerTop.index);
-                triangleList.Add(centerRight.index);
-                triangleList.Add(centerBot.index);
-
-                triangleList.Add(centerTop.index);
-                triangleList.Add(topRight.index);
-                triangleList.Add(centerRight.index);
-                break;
+                return vertexCount + 12;
 
             case 6:
-                triangleList.Add(centerTop.index);
-                triangleList.Add(bottomRight.index);
-                triangleList.Add(centerBot.index);
+                vertexList.Add(centerTop.position);
+                vertexList.Add(bottomRight.position);
+                vertexList.Add(centerBot.position);
+                
+                vertexList.Add(centerTop.position);
+                vertexList.Add(topRight.position);
+                vertexList.Add(bottomRight.position);
 
-                triangleList.Add(centerTop.index);
-                triangleList.Add(topRight.index);
-                triangleList.Add(bottomRight.index);
-                break;
+                return vertexCount + 6;
 
             case 7:
-                triangleList.Add(centerLeft.index);
-                triangleList.Add(bottomRight.index);
-                triangleList.Add(bottomLeft.index);
+                vertexList.Add(centerLeft.position);
+                vertexList.Add(bottomRight.position);
+                vertexList.Add(bottomLeft.position);
+                
+                vertexList.Add(centerLeft.position);
+                vertexList.Add(centerTop.position);
+                vertexList.Add(bottomRight.position);
+                
+                vertexList.Add(centerTop.position);
+                vertexList.Add(topRight.position);
+                vertexList.Add(bottomRight.position);
 
-                triangleList.Add(centerLeft.index);
-                triangleList.Add(centerTop.index);
-                triangleList.Add(bottomRight.index);
-
-                triangleList.Add(centerTop.index);
-                triangleList.Add(topRight.index);
-                triangleList.Add(bottomRight.index);
-                break;
+                return vertexCount + 9;
 
             case 8:
-                triangleList.Add(topLeft.index);
-                triangleList.Add(centerTop.index);
-                triangleList.Add(centerLeft.index);
-                break;
+                vertexList.Add(topLeft.position);
+                vertexList.Add(centerTop.position);
+                vertexList.Add(centerLeft.position);
+
+                return vertexCount + 3;
 
             case 9:
-                triangleList.Add(topLeft.index);
-                triangleList.Add(centerBot.index);
-                triangleList.Add(bottomLeft.index);
+                vertexList.Add(topLeft.position);
+                vertexList.Add(centerBot.position);
+                vertexList.Add(bottomLeft.position);
+                
+                vertexList.Add(topLeft.position);
+                vertexList.Add(centerTop.position);
+                vertexList.Add(centerBot.position);
 
-                triangleList.Add(topLeft.index);
-                triangleList.Add(centerTop.index);
-                triangleList.Add(centerBot.index);
-                break;
+                return vertexCount + 6;
 
             case 10:
-                triangleList.Add(topLeft.index);
-                triangleList.Add(centerTop.index);
-                triangleList.Add(centerLeft.index);
+                vertexList.Add(topLeft.position);
+                vertexList.Add(centerTop.position);
+                vertexList.Add(centerLeft.position);
+                
+                vertexList.Add(centerTop.position);
+                vertexList.Add(centerBot.position);
+                vertexList.Add(centerLeft.position);
+                
+                vertexList.Add(centerTop.position);
+                vertexList.Add(centerRight.position);
+                vertexList.Add(centerBot.position);
+                
+                vertexList.Add(centerRight.position);
+                vertexList.Add(bottomRight.position);
+                vertexList.Add(centerBot.position);
 
-                triangleList.Add(centerTop.index);
-                triangleList.Add(centerBot.index);
-                triangleList.Add(centerLeft.index);
-
-                triangleList.Add(centerTop.index);
-                triangleList.Add(centerRight.index);
-                triangleList.Add(centerBot.index);
-
-                triangleList.Add(centerRight.index);
-                triangleList.Add(bottomRight.index);
-                triangleList.Add(centerBot.index);
-                break;
+                return vertexCount + 12;
 
             case 11:
-                triangleList.Add(topLeft.index);
-                triangleList.Add(centerTop.index);
-                triangleList.Add(bottomLeft.index);
+                vertexList.Add(topLeft.position);
+                vertexList.Add(centerTop.position);
+                vertexList.Add(bottomLeft.position);
+                
+                vertexList.Add(centerTop.position);
+                vertexList.Add(centerRight.position);
+                vertexList.Add(bottomLeft.position);
+                
+                vertexList.Add(centerRight.position);
+                vertexList.Add(bottomRight.position);
+                vertexList.Add(bottomLeft.position);
 
-                triangleList.Add(centerTop.index);
-                triangleList.Add(centerRight.index);
-                triangleList.Add(bottomLeft.index);
-
-                triangleList.Add(centerRight.index);
-                triangleList.Add(bottomRight.index);
-                triangleList.Add(bottomLeft.index);
-                break;
+                return vertexCount + 9;
 
             case 12:
-                triangleList.Add(topLeft.index);
-                triangleList.Add(centerRight.index);
-                triangleList.Add(centerLeft.index);
+                vertexList.Add(topLeft.position);
+                vertexList.Add(centerRight.position);
+                vertexList.Add(centerLeft.position);
+                
+                vertexList.Add(topLeft.position);
+                vertexList.Add(topRight.position);
+                vertexList.Add(centerRight.position);
 
-                triangleList.Add(topLeft.index);
-                triangleList.Add(topRight.index);
-                triangleList.Add(centerRight.index);
-                break;
+                return vertexCount + 6;
 
             case 13:
-                triangleList.Add(topLeft.index);
-                triangleList.Add(centerBot.index);
-                triangleList.Add(bottomLeft.index);
+                vertexList.Add(topLeft.position);
+                vertexList.Add(centerBot.position);
+                vertexList.Add(bottomLeft.position);
+                
+                vertexList.Add(topLeft.position);
+                vertexList.Add(centerRight.position);
+                vertexList.Add(centerBot.position);
+                
+                vertexList.Add(topLeft.position);
+                vertexList.Add(topRight.position);
+                vertexList.Add(centerRight.position);
 
-                triangleList.Add(topLeft.index);
-                triangleList.Add(centerRight.index);
-                triangleList.Add(centerBot.index);
-
-                triangleList.Add(topLeft.index);
-                triangleList.Add(topRight.index);
-                triangleList.Add(centerRight.index);
-                break;
+                return vertexCount + 9;
 
             case 14:
-                triangleList.Add(topLeft.index);
-                triangleList.Add(topRight.index);
-                triangleList.Add(centerLeft.index);
+                vertexList.Add(topLeft.position);
+                vertexList.Add(topRight.position);
+                vertexList.Add(centerLeft.position);
+                
+                vertexList.Add(centerLeft.position);
+                vertexList.Add(topRight.position);
+                vertexList.Add(centerBot.position);
+                
+                vertexList.Add(centerBot.position);
+                vertexList.Add(topRight.position);
+                vertexList.Add(bottomRight.position);
 
-                triangleList.Add(centerLeft.index);
-                triangleList.Add(topRight.index);
-                triangleList.Add(centerBot.index);
-
-                triangleList.Add(centerBot.index);
-                triangleList.Add(topRight.index);
-                triangleList.Add(bottomRight.index);
-                break;
-
-            case 15:
-                triangleList.Add(topLeft.index);
-                triangleList.Add(bottomRight.index);
-                triangleList.Add(bottomLeft.index);
-
-                triangleList.Add(topLeft.index);
-                triangleList.Add(topRight.index);
-                triangleList.Add(bottomRight.index);
-                break;
+                return vertexCount + 9;
         }
+
+        // shouldn't actually reach
+        return vertexCount;
     }
 }
 

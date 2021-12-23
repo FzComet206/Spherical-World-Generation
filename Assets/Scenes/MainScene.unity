@@ -431,6 +431,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 466752993, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
+      propertyPath: heightScale
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2259064609053305316, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
       propertyPath: seaParent
       value: 
@@ -439,14 +443,6 @@ PrefabInstance:
       propertyPath: meshParent
       value: 
       objectReference: {fileID: 754006412}
-    - target: {fileID: 2259064609053305316, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
-      propertyPath: seaMaterial
-      value: 
-      objectReference: {fileID: 2100000, guid: 9f5d373fef32c61489ff9408773b1d6b, type: 2}
-    - target: {fileID: 2259064609053305316, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
-      propertyPath: meshMaterial
-      value: 
-      objectReference: {fileID: 2100000, guid: 3ee0402ab02d7994ba4f7113cef700ce, type: 2}
     - target: {fileID: 3497322506244145624, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
       propertyPath: m_Name
       value: Singularity

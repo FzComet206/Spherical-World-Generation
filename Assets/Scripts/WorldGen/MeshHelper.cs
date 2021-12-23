@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -18,7 +19,9 @@ public class MeshHelper: MonoBehaviour
     public Vector3 playerPos = Vector3.zero;
     public List<DataTypes.ChunkConfig> renderingChunk;
     public Stack<DataTypes.ChunkConfig> genConfig;
+    
     private MeshThread meshThread;
+    private WorldGenerator worldGen;
     
     public Material meshMaterial;
     public Transform meshParent;
@@ -34,9 +37,13 @@ public class MeshHelper: MonoBehaviour
         Vector3.right,
         Vector3.left
     };
-    
-    private void Start() { meshThread = FindObjectOfType<MeshThread>(); }
-    public void GenerateMesh(DataTypes.MeshSettings settings, float[][] heightMap)
+
+    private void Start()
+    {
+        meshThread = FindObjectOfType<MeshThread>();
+        worldGen = FindObjectOfType<WorldGenerator>();
+    }
+    public void GenerateMesh(DataTypes.MeshSettings settings)
     {
         int numSubDivisions = settings.numSubdivisions;
         int planeRes = settings.planeRes;
@@ -159,24 +166,44 @@ public class MeshHelper: MonoBehaviour
         }
     }
 
+    public void UpdateHeightMap()
+    {
+        int w = worldGen.WorldConfig.tex.texWidth;
+        int h = worldGen.WorldConfig.tex.texHeight;
+        Texture2D tex = Lib.ReadFromPng(Configurations.dirPathN);
+        meshThread.heightMap = new Color[w][];
+        for (int i = 0; i < w; i++)
+        {
+            meshThread.heightMap[i] = new Color[h];
+            for (int j = 0; j < h; j++)
+            {
+                meshThread.heightMap[i][j] = tex.GetPixel(i, j);
+            }
+        }
+    }
+
     void OnChunkDataReceived(DataTypes.ChunkData data)
     {
-        Mesh mesh = new Mesh();
-        mesh.indexFormat = IndexFormat.UInt32;
-        mesh.vertices = data.verticies;
-        mesh.triangles = data.triangles;
-        mesh.uv = data.Uvs;
-        
-        mesh.RecalculateNormals();
-        mesh.RecalculateBounds();
-        
+        // obj is the game object for each chunk, and is populated with layers of marching squared meshes
         GameObject obj = new GameObject("Chunk", typeof(MeshFilter), typeof(MeshRenderer), typeof(MeshCollider));
-        obj.GetComponent<MeshFilter>().sharedMesh = mesh;
-        obj.GetComponent<MeshRenderer>().material = meshMaterial;
-        obj.GetComponent<MeshCollider>().sharedMesh = mesh;
+        for (int i = 0; i < data.triangles.Count; i++)
+        {
+            Mesh mesh = new Mesh();
+            mesh.indexFormat = IndexFormat.UInt32;
+            mesh.vertices = data.verticies[i];
+            mesh.triangles = data.triangles[i];
+            mesh.uv = data.Uvs[i];
+            mesh.RecalculateNormals();
+            mesh.RecalculateBounds();
+            
+            GameObject l = new GameObject("Layer", typeof(MeshFilter), typeof(MeshRenderer), typeof(MeshCollider));
+            l.GetComponent<MeshFilter>().sharedMesh = mesh;
+            l.GetComponent<MeshRenderer>().material = meshMaterial;
+            l.GetComponent<MeshCollider>().sharedMesh = mesh;
+            l.transform.parent = obj.transform;
+        }
+        meshDictionary[data.index] = obj;
         
-        obj.transform.parent = meshParent.transform;
-        obj.GetComponent<MeshRenderer>().shadowCastingMode = ShadowCastingMode.Off;
         
         Mesh sea = new Mesh();
         sea.indexFormat = IndexFormat.UInt32;
@@ -194,7 +221,6 @@ public class MeshHelper: MonoBehaviour
 
         seaPiece.transform.parent = seaParent.transform;
 
-        meshDictionary[data.index] = obj;
         seaDictionary[data.index] = seaPiece;
     }
     

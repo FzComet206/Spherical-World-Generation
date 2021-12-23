@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 3497322506244145627}
   - component: {fileID: 2195358137158845682}
   - component: {fileID: 2259064609053305316}
+  - component: {fileID: 466752992}
+  - component: {fileID: 466752993}
   m_Layer: 0
   m_Name: Singularity
   m_TagString: Untagged
@@ -45,26 +47,36 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MeshSettings:
-    planeRes: 0
-    numSubdivisions: 0
-    generateAll: 0
-    RenderDistance: 0
-    meshMaterial: {fileID: 0}
-    seaMaterial: {fileID: 0}
-    meshParent: {fileID: 0}
-    seaParent: {fileID: 0}
-  NoiseConfig:
-    seed0: 0
-    seed1: 0
-    seed2: 0
-    scale: 0
-    octaves: 0
-    gain: 0
-    lacunarity: 0
-    altitudeTurbulenceScale: 0
-    altitudeTurbulenceAmplitude: 0
-    altitudeToTemperatureWeight: 0
-    altitudeToHumidityWeight: 0
+    planeRes: 512
+    numSubdivisions: 16
+    generateAll: 1
+    RenderDistance: 1
+  WorldConfig:
+    tex:
+      compute: {fileID: 7200000, guid: c632a5e22c5e15c49b88fe8aa6944205, type: 3}
+      texWidth: 2048
+      texHeight: 1024
+    noise:
+      seed0: 0
+      seed1: 0
+      seed2: 0
+      scale: 2000
+      octaves: 5
+      gain: 0.1
+      lacunarity: 1.5
+      altitudeTurbulenceScale: 0
+      altitudeTurbulenceAmplitude: 0
+      altitudeToTemperatureWeight: 0
+      altitudeToHumidityWeight: 0
+    biomes:
+      humidityToTemperatureCurve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      curveRes: 0
+      biomes: []
 --- !u!114 &2259064609053305316
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -79,7 +91,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 0
   playerPos: {x: 0, y: 0, z: 0}
-  meshMaterial: {fileID: 0}
+  meshMaterial: {fileID: 2100000, guid: 3ee0402ab02d7994ba4f7113cef700ce, type: 2}
   meshParent: {fileID: 0}
-  seaMaterial: {fileID: 0}
+  seaMaterial: {fileID: 2100000, guid: 9f5d373fef32c61489ff9408773b1d6b, type: 2}
   seaParent: {fileID: 0}
+--- !u!114 &466752992
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3497322506244145624}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4da019379b0e1d4ea88855c7c5ee463, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &466752993
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3497322506244145624}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c153e106d5f78a44b6acafb03f1b3f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  heightScale: 0

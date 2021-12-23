@@ -7,6 +7,7 @@ using UnityEngine;
 public class MeshThread : MonoBehaviour
 {
     public float heightScale;
+    public int numberOfHeightLayers;
     
     public Queue<DataTypes.MapThreadInfo> threadInfoQueue = new Queue<DataTypes.MapThreadInfo>();
     public Color[][] heightMap;
@@ -54,17 +55,11 @@ public class MeshThread : MonoBehaviour
         Vector2 endT = config.endT;
         int res = config.chunkRes;
     
-        // below initializes main mesh data
-        int vertLength = res * res;
-        int triLength = (res - 1) * (res - 1) * 6;
-
-        Vector3[] vertices = new Vector3[vertLength];
-        int[] triangles = new int[triLength];
-        Vector3[] flatVert = new Vector3[triLength];
-        Vector2[] uvs = new Vector2[vertLength];
-        Vector2[] flatUvs = new Vector2[triLength];
+        // below initializes main return data
+        List<Vector3[]> vertices = new List<Vector3[]>();
+        List<int[]> triangles = new List<int[]>();
+        List<Vector2[]> uvs = new List<Vector2[]>();
         
-        int triIndex = 0;
         float ty = startT.y;
         float dx = (endT.x - startT.x) / (res - 1);
         float dy = (endT.y - startT.y) / (res - 1);
@@ -72,59 +67,46 @@ public class MeshThread : MonoBehaviour
         int width = heightMap.Length - 1;
         int height = heightMap[0].Length - 1;
 
-        for (int y = 0; y < res; y++)
+        // for each square, generate 8 vertex index and 8 vertex position
+        for (int i = 0; i < numberOfHeightLayers; i++)
         {
-            float tx = startT.x;
+            List<Vector3> verticiesList = new List<Vector3>();
+            List<int> triangleList = new List<int>();
+            List<Vector2> uvList = new List<Vector2>();
             
-            for (int x = 0; x < res; x++)
+            for (int y = 0; y < res; y += 2)
             {
-                int i = x + y * res;
-
-                Vector3 pointOnUnitCube = face + (tx - 0.5f) * 2 * config.axisA + (ty - 0.5f) * 2 * config.axisB;
-                Vector3 pointOnSphere = Lib.PointOnCubeToPointOnSphere(pointOnUnitCube);
-
-                Vector2 c = Lib.PointToCoordinate(pointOnSphere).ToUV();
-                uvs[i] = c;
+                float tx = startT.x;
                 
-                int u = Mathf.FloorToInt(c.x * width);
-                int v = Mathf.FloorToInt(c.y * height);
-
-                float h = heightMap[u][v].r;
-                
-                h = Mathf.FloorToInt(h * 10);
-                h *= 0.2f;
-                // h = Mathf.SmoothStep(0, 1, h);
-                
-                h = h * 0.001f * heightScale;
-               
-                pointOnSphere *= h + 1;
-                vertices[i] = pointOnSphere;
-                
-                if (x != res - 1 && y != res - 1)
+                for (int x = 0; x < res; x += 2)
                 {
-                    triangles[triIndex] = i;
-                    triangles[triIndex + 1] = i + res + 1;
-                    triangles[triIndex + 2] = i + res;
+                    // get position for current vertex (square)
+                    Node topLeft = InitializePoints(config, face, tx, ty, width, height, i);
+                    Node centerTop = InitializePoints(config, face, tx + dx, ty, width, height, i);
+                    Node topRight = InitializePoints(config, face, tx + 2 * dx, ty, width, height, i);
+                    Node centerRight = InitializePoints(config, face, tx + 2 * dx, ty + dy, width, height, i);
+                    Node bottomRight = InitializePoints(config, face, tx + 2 * dx, ty + 2 * dy, width, height, i);
+                    Node centerBot = InitializePoints(config, face, tx + dx, ty + 2 * dy, width, height, i);
+                    Node bottomLeft = InitializePoints(config, face, tx, ty + 2 * dy, width, height, i);
+                    Node centerLeft = InitializePoints(config, face, tx, ty + dy, width, height, i);
 
-                    triangles[triIndex + 3] = i;
-                    triangles[triIndex + 4] = i + 1;
-                    triangles[triIndex + 5] = i + res + 1;
-                    triIndex += 6;
+                    // ignore edge
+                    if (x != res - 2 && y != res - 2)
+                    {
+                        Square march = new Square(centerLeft, centerTop, centerRight, centerBot,
+                            topLeft, topRight, bottomRight, bottomLeft);
+
+                    }
+                    tx += dx * 2;
                 }
-
-                tx += dx;
+                ty += dy * 2;
             }
-            ty += dy;
+
+            vertices.Add(verticiesList.ToArray());
+            triangles.Add(triangleList.ToArray());
+            uvs.Add(uvList.ToArray());
         }
-    
-        // this applies flat shading
-        // Vector2[] flatShadedUvs = new Vector2[triangles.Length];
-        for (int i = 0; i < triangles.Length; i++)
-        {
-            flatVert[i] = vertices[triangles[i]];
-            flatUvs[i] = uvs[triangles[i]];
-            triangles[i] = i;
-        }
+        
         
         // below initializes sea mesh data
         int seaRes = res / 4;
@@ -170,7 +152,18 @@ public class MeshThread : MonoBehaviour
             tys += dys;
         }
         
-        DataTypes.ChunkData data = new DataTypes.ChunkData(flatVert, triangles, flatUvs, config.index, seaVert, seaTri, seaUvs);
+        DataTypes.ChunkData data = new DataTypes.ChunkData(vertices, triangles, uvs, config.index, seaVert, seaTri, seaUvs);
         return data;
+    }
+
+    private Node InitializePoints(DataTypes.ChunkConfig config, Vector3 face, float tx, float ty, int width, int height, int i)
+    {
+        Vector3 pos = face + (tx - 0.5f) * 2 * config.axisA + (ty - 0.5f) * 2 * config.axisB;
+        Vector3 posReal= Lib.PointOnCubeToPointOnSphere(pos);
+        Vector2 c = Lib.PointToCoordinate(posReal).ToUV();
+        int u = Mathf.FloorToInt(c.x * width);
+        int v = Mathf.FloorToInt(c.y * height);
+        float h = Mathf.Floor(heightMap[u][v].r * numberOfHeightLayers);
+        return new Node(posReal, h, i);
     }
 }

@@ -5,12 +5,15 @@ RWTexture2D<float4> NoiseMap;
 
 int randSeed1;
 int randSeed2;
+int randSeed3;
 int octaves;
+
 int scale;
 float gain;
 float lacunarity;
-float width;
-float height;
+
+int width;
+int height;
 
 
 float remap(float v, float minOld, float maxOld, float minNew, float maxNew) {
@@ -57,7 +60,14 @@ void NoiseGenerator (uint3 id : SV_DispatchThreadID)
     
     float h = (fbm(mainV / scale) + 1) / 2;
     float subH = (fbm(subV / (scale / 2)) + 1) / 2;
+    
+    float h0 = step(0.6, h);
+    float subH0 = step(0.8, subH);
+    
+    float f = 0;
+    
+    if (h0 > 0.99) { f = remap(h, 0.6, 1, 0, 1);}
 
-    float value = h + subH;
-    NoiseMap[id.xy] = float4(value, value, value, value);
+    float4 d0 = float4(f, f, f, 1);
+    NoiseMap[id.xy] = d0;
 }

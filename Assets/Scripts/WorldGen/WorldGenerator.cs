@@ -1,11 +1,9 @@
-using System;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class WorldGenerator : MonoBehaviour
 {
-    [SerializeField] private DataTypes.MeshSettings MeshSettings;
-    [SerializeField] private DataTypes.WorldConfig WorldConfig;
+    [SerializeField] public DataTypes.MeshSettings MeshSettings;
+    [SerializeField] public DataTypes.WorldConfig WorldConfig;
     private MeshHelper meshHelper;
     private ComputeHelper computeHelper;
 
@@ -13,14 +11,9 @@ public class WorldGenerator : MonoBehaviour
     {
         meshHelper = FindObjectOfType<MeshHelper>();
         computeHelper = FindObjectOfType<ComputeHelper>();
-        meshHelper.GenerateMesh(MeshSettings, computeHelper.GenerateNoise(WorldConfig));
-    }
-    
-
-
-    void GenerateTexture()
-    {
         
+        computeHelper.GenerateNoise(WorldConfig);
+        meshHelper.UpdateHeightMap();
+        meshHelper.GenerateMesh(MeshSettings);
     }
-
 }
