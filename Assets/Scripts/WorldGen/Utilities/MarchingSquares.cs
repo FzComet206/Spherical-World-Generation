@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class Node
 {
@@ -8,9 +7,9 @@ public class Node
     public Vector2 uv;
     public int active;
     
-    public Node(Vector3 position, Vector2 uv, float value, int threshold)
+    public Node(Vector3 position, Vector2 uv, float value, int threshold0, int threshold1)
     {
-        active = value >= threshold? 1 : 0;
+        active = (value >= threshold0 && value <= threshold1)? 1 : 0;
         this.position = position;
         this.uv = uv;
     }
@@ -34,7 +33,7 @@ public class Square
     }
 
     // triangulate update the triangle arr and return new triangle index
-    public int March(List<Vector3> vertexList, List<Vector2> uvList, int vertexCount)
+    public void March(List<Vector3> vertexList, List<Vector2> uvList, float cliffHeight)
     {
         int config = bottomLeft.active * 1 + bottomRight.active * 2 + topRight.active * 4 + topLeft.active * 8;
 
@@ -42,7 +41,7 @@ public class Square
         {
             case 0:
                 // nothing created, nothing added
-                return vertexCount;
+                break;
             
             case 15:
 
@@ -60,18 +59,18 @@ public class Square
                 uvList.Add(topLeft.uv);
                 uvList.Add(topRight.uv);
                 uvList.Add(bottomRight.uv);
-
-                return vertexCount + 6;
+                break;
             
             case 1:
                 vertexList.Add(centerLeft.position);
                 vertexList.Add(centerBot.position);
                 vertexList.Add(centerLeft.position);
                 
+                
                 uvList.Add(centerLeft.uv);
                 uvList.Add(centerBot.uv);
                 uvList.Add(centerLeft.uv);
-                return vertexCount + 3;
+                break;
 
             case 2:
                 vertexList.Add(centerBot.position);
@@ -81,7 +80,7 @@ public class Square
                 uvList.Add(centerBot.uv);
                 uvList.Add(centerRight.uv);
                 uvList.Add(bottomRight.uv);
-                return vertexCount + 3;
+                break;
 
             case 3:
                 vertexList.Add(centerLeft.position);
@@ -98,7 +97,7 @@ public class Square
                 uvList.Add(centerLeft.uv);
                 uvList.Add(centerRight.uv);
                 uvList.Add(bottomRight.uv);
-                return vertexCount + 6;
+                break;
 
             case 4:
                 vertexList.Add(centerTop.position);
@@ -108,7 +107,7 @@ public class Square
                 uvList.Add(centerTop.uv);
                 uvList.Add(topRight.uv);
                 uvList.Add(centerRight.uv);
-                return vertexCount + 3;
+                break;
 
             case 5:
                 vertexList.Add(centerLeft.position);
@@ -140,7 +139,7 @@ public class Square
                 uvList.Add(centerTop.uv);
                 uvList.Add(topRight.uv);
                 uvList.Add(centerRight.uv);
-                return vertexCount + 12;
+                break;
 
             case 6:
                 vertexList.Add(centerTop.position);
@@ -157,7 +156,7 @@ public class Square
                 uvList.Add(centerTop.uv);
                 uvList.Add(topRight.uv);
                 uvList.Add(bottomRight.uv);
-                return vertexCount + 6;
+                break;
 
             case 7:
                 vertexList.Add(centerLeft.position);
@@ -181,7 +180,7 @@ public class Square
                 uvList.Add(centerTop.uv);
                 uvList.Add(topRight.uv);
                 uvList.Add(bottomRight.uv);
-                return vertexCount + 9;
+                break;
 
             case 8:
                 vertexList.Add(topLeft.position);
@@ -191,7 +190,7 @@ public class Square
                 uvList.Add(topLeft.uv);
                 uvList.Add(centerTop.uv);
                 uvList.Add(centerLeft.uv);
-                return vertexCount + 3;
+                break;
 
             case 9:
                 vertexList.Add(topLeft.position);
@@ -208,7 +207,7 @@ public class Square
                 uvList.Add(topLeft.uv);
                 uvList.Add(centerTop.uv);
                 uvList.Add(centerBot.uv);
-                return vertexCount + 6;
+                break;
 
             case 10:
                 vertexList.Add(topLeft.position);
@@ -239,7 +238,7 @@ public class Square
                 uvList.Add(centerRight.uv);
                 uvList.Add(bottomRight.uv);
                 uvList.Add(centerBot.uv);
-                return vertexCount + 12;
+                break;
 
             case 11:
                 vertexList.Add(topLeft.position);
@@ -263,7 +262,7 @@ public class Square
                 uvList.Add(centerRight.uv);
                 uvList.Add(bottomRight.uv);
                 uvList.Add(bottomLeft.uv);
-                return vertexCount + 9;
+                break;
 
             case 12:
                 vertexList.Add(topLeft.position);
@@ -280,7 +279,7 @@ public class Square
                 uvList.Add(topLeft.uv);
                 uvList.Add(topRight.uv);
                 uvList.Add(centerRight.uv);
-                return vertexCount + 6;
+                break;
 
             case 13:
                 vertexList.Add(topLeft.position);
@@ -304,7 +303,7 @@ public class Square
                 uvList.Add(topLeft.uv);
                 uvList.Add(topRight.uv);
                 uvList.Add(centerRight.uv);
-                return vertexCount + 9;
+                break;
 
             case 14:
                 vertexList.Add(topLeft.position);
@@ -328,11 +327,9 @@ public class Square
                 uvList.Add(centerBot.uv);
                 uvList.Add(topRight.uv);
                 uvList.Add(bottomRight.uv);
-                return vertexCount + 9;
+                break;
+            default: break;
         }
-
-        // shouldn't actually reach
-        return vertexCount;
     }
 }
 

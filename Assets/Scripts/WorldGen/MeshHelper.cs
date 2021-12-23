@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Linq.Expressions;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -184,22 +185,17 @@ public class MeshHelper: MonoBehaviour
     void OnChunkDataReceived(DataTypes.ChunkData data)
     {
         // obj is the game object for each chunk, and is populated with layers of marching squared meshes
-        GameObject obj = new GameObject("Chunk");
+        GameObject obj = new GameObject("Chunk" + data.index, typeof(MeshFilter), typeof(MeshRenderer), typeof(MeshCollider));
         
-        for (int i = 0; i < data.triangles.Count; i++)
-        {
-            Mesh mesh = new Mesh();
-            mesh.indexFormat = IndexFormat.UInt32;
-            mesh.vertices = data.verticies[i];
-            mesh.triangles = data.triangles[i];
-            mesh.uv = data.Uvs[i];
-            
-            GameObject l = new GameObject("Layer", typeof(MeshFilter), typeof(MeshRenderer), typeof(MeshCollider));
-            l.GetComponent<MeshFilter>().sharedMesh = mesh;
-            l.GetComponent<MeshRenderer>().material = meshMaterial;
-            l.GetComponent<MeshCollider>().sharedMesh = mesh;
-            l.transform.parent = obj.transform;
-        }
+        Mesh mesh = new Mesh();
+        mesh.indexFormat = IndexFormat.UInt32;
+        mesh.vertices = data.verticies;
+        mesh.triangles = data.triangles;
+        mesh.uv = data.Uvs;
+
+        obj.GetComponent<MeshFilter>().sharedMesh = mesh;
+        obj.GetComponent<MeshCollider>().sharedMesh = mesh;
+        obj.GetComponent<MeshRenderer>().material = meshMaterial;
 
         obj.transform.parent = meshParent;
         meshDictionary[data.index] = obj;
@@ -241,5 +237,8 @@ public class MeshHelper: MonoBehaviour
             }
             yield return new WaitForEndOfFrame();
         }
+        
+        worldGen.s.Stop();
+        Debug.Log(worldGen.s.Elapsed);
     }
 }

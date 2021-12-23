@@ -9,6 +9,7 @@ public class MeshThread : MonoBehaviour
 {
     public float heightScale;
     public int numberOfHeightLayers;
+    public float cliffHeight;
     
     public Queue<DataTypes.MapThreadInfo> threadInfoQueue = new Queue<DataTypes.MapThreadInfo>();
     public Color[][] heightMap;
@@ -57,9 +58,9 @@ public class MeshThread : MonoBehaviour
         int res = config.chunkRes;
     
         // below initializes main return data
-        List<Vector3[]> vertices = new List<Vector3[]>();
-        List<int[]> triangles = new List<int[]>();
-        List<Vector2[]> uvs = new List<Vector2[]>();
+
+        List<Vector3> vertList = new List<Vector3>();
+        List<Vector2> uvList = new List<Vector2>();
         
         float dx = (endT.x - startT.x) / (res - 1);
         float dy = (endT.y - startT.y) / (res - 1);
@@ -70,11 +71,7 @@ public class MeshThread : MonoBehaviour
         // for each square, generate 8 vertex index and 8 vertex position
         for (int i = 0; i < numberOfHeightLayers; i++)
         {
-            List<Vector3> verticiesList = new List<Vector3>();
-            List<Vector2> uvList = new List<Vector2>();
-            
             float ty = startT.y;
-            int triangleCount = 0;
             
             for (int y = 0; y < res; y ++)
             {
@@ -98,24 +95,24 @@ public class MeshThread : MonoBehaviour
                     {
                         Square march = new Square(centerLeft, centerTop, centerRight, centerBot,
                             topLeft, topRight, bottomRight, bottomLeft);
-                        triangleCount = march.March(verticiesList, uvList, triangleCount);
+                        march.March(vertList, uvList, cliffHeight);
                     }
                     
                     tx += dx;
                 }
                 ty += dy;
             }
-
-            int[] triangleArr = new int[triangleCount];
-            for (int j = 0; j < triangleCount; j++)
-            {
-                triangleArr[j] = j;
-            }
-            
-            vertices.Add(verticiesList.ToArray());
-            triangles.Add(triangleArr);
-            uvs.Add(uvList.ToArray());
         }
+
+        int[] triangles = new int[vertList.Count];
+        for (int i = 0; i < vertList.Count; i++)
+        {
+            triangles[i] = i;
+        }
+
+        Vector3[] verticies = vertList.ToArray();
+        Vector2[] uvs = uvList.ToArray();
+        
         
         
         // below initializes sea mesh data
@@ -162,7 +159,7 @@ public class MeshThread : MonoBehaviour
             tys += dys;
         }
         
-        DataTypes.ChunkData data = new DataTypes.ChunkData(vertices, triangles, uvs, config.index, seaVert, seaTri, seaUvs);
+        DataTypes.ChunkData data = new DataTypes.ChunkData(verticies, triangles, uvs, config.index, seaVert, seaTri, seaUvs);
         return data;
     }
 
@@ -175,6 +172,6 @@ public class MeshThread : MonoBehaviour
         int v = Mathf.FloorToInt(c.y * height);
         int h = Mathf.FloorToInt(heightMap[u][v].r * numberOfHeightLayers);
         
-        return new Node(posReal * (1 + 0.01f * i), c , h, i);
+        return new Node(posReal * (1 + 0.001f * i), c , h, i, i + 1);
     }
 }

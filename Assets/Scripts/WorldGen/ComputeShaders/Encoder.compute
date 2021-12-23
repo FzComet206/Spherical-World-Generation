@@ -46,7 +46,7 @@ float fbm(float3 x)
     return value;
 }
 
-[numthreads(8,8,1)]
+[numthreads(16,16,1)]
 void NoiseGenerator (uint3 id : SV_DispatchThreadID)
 {
     // this generate main height

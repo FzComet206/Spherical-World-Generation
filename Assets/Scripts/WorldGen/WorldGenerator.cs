@@ -1,4 +1,6 @@
 using UnityEngine;
+using System.Diagnostics;
+using Debug = UnityEngine.Debug;
 
 public class WorldGenerator : MonoBehaviour
 {
@@ -7,8 +9,11 @@ public class WorldGenerator : MonoBehaviour
     private MeshHelper meshHelper;
     private ComputeHelper computeHelper;
 
+    public Stopwatch s;
+
     private void Start()
     {
+        s = Stopwatch.StartNew();
         meshHelper = FindObjectOfType<MeshHelper>();
         computeHelper = FindObjectOfType<ComputeHelper>();
         

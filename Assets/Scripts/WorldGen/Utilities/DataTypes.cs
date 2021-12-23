@@ -117,9 +117,9 @@ public static class DataTypes
     // adjust this
     public struct ChunkData
     {
-        public List<Vector3[]> verticies;
-        public List<int[]> triangles;
-        public List<Vector2[]> Uvs;
+        public Vector3[] verticies;
+        public int[] triangles;
+        public Vector2[] Uvs;
 
         public Vector3[] seaVertices;
         public int[] seatriangles;
@@ -127,7 +127,7 @@ public static class DataTypes
 
         public int index;
 
-        public ChunkData(List<Vector3[]> verticies, List<int[]> triangles, List<Vector2[]> Uvs, int index, Vector3[] seaVertices, int[] seatriangles, Vector2[] seaUvs)
+        public ChunkData(Vector3[] verticies, int[] triangles, Vector2[] Uvs, int index, Vector3[] seaVertices, int[] seatriangles, Vector2[] seaUvs)
         {
             this.verticies = verticies;
             this.triangles = triangles;
