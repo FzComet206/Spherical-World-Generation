@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Threading;
 using UnityEngine;
 
@@ -60,7 +61,6 @@ public class MeshThread : MonoBehaviour
         List<int[]> triangles = new List<int[]>();
         List<Vector2[]> uvs = new List<Vector2[]>();
         
-        float ty = startT.y;
         float dx = (endT.x - startT.x) / (res - 1);
         float dy = (endT.y - startT.y) / (res - 1);
 
@@ -71,39 +71,49 @@ public class MeshThread : MonoBehaviour
         for (int i = 0; i < numberOfHeightLayers; i++)
         {
             List<Vector3> verticiesList = new List<Vector3>();
-            List<int> triangleList = new List<int>();
             List<Vector2> uvList = new List<Vector2>();
             
-            for (int y = 0; y < res; y += 2)
+            float ty = startT.y;
+            int triangleCount = 0;
+            
+            for (int y = 0; y < res; y ++)
             {
                 float tx = startT.x;
                 
-                for (int x = 0; x < res; x += 2)
+                for (int x = 0; x < res; x ++)
                 {
                     // get position for current vertex (square)
                     Node topLeft = InitializePoints(config, face, tx, ty, width, height, i);
-                    Node centerTop = InitializePoints(config, face, tx + dx, ty, width, height, i);
-                    Node topRight = InitializePoints(config, face, tx + 2 * dx, ty, width, height, i);
-                    Node centerRight = InitializePoints(config, face, tx + 2 * dx, ty + dy, width, height, i);
-                    Node bottomRight = InitializePoints(config, face, tx + 2 * dx, ty + 2 * dy, width, height, i);
-                    Node centerBot = InitializePoints(config, face, tx + dx, ty + 2 * dy, width, height, i);
-                    Node bottomLeft = InitializePoints(config, face, tx, ty + 2 * dy, width, height, i);
-                    Node centerLeft = InitializePoints(config, face, tx, ty + dy, width, height, i);
+                    Node centerTop = InitializePoints(config, face, tx + 0.5f * dx, ty, width, height, i);
+                    Node topRight = InitializePoints(config, face, tx + dx, ty, width, height, i);
+                    Node centerRight = InitializePoints(config, face, tx + dx, ty + 0.5f * dy, width, height, i);
+                    
+                    Node bottomRight = InitializePoints(config, face, tx + dx, ty + dy, width, height, i);
+                    Node centerBot = InitializePoints(config, face, tx + 0.5f * dx, ty + dy, width, height, i);
+                    Node bottomLeft = InitializePoints(config, face, tx, ty + dy, width, height, i);
+                    Node centerLeft = InitializePoints(config, face, tx, ty + 0.5f * dy, width, height, i);
 
                     // ignore edge
-                    if (x != res - 2 && y != res - 2)
+                    if (x != res - 1 && y != res - 1)
                     {
                         Square march = new Square(centerLeft, centerTop, centerRight, centerBot,
                             topLeft, topRight, bottomRight, bottomLeft);
-
+                        triangleCount = march.March(verticiesList, uvList, triangleCount);
                     }
-                    tx += dx * 2;
+                    
+                    tx += dx;
                 }
-                ty += dy * 2;
+                ty += dy;
             }
 
+            int[] triangleArr = new int[triangleCount];
+            for (int j = 0; j < triangleCount; j++)
+            {
+                triangleArr[j] = j;
+            }
+            
             vertices.Add(verticiesList.ToArray());
-            triangles.Add(triangleList.ToArray());
+            triangles.Add(triangleArr);
             uvs.Add(uvList.ToArray());
         }
         
@@ -133,7 +143,7 @@ public class MeshThread : MonoBehaviour
                 Vector3 pointOnUnitCube = face + (txs - 0.5f) * 2 * config.axisA + (tys - 0.5f) * 2 * config.axisB;
                 Vector3 pointOnSphere = Lib.PointOnCubeToPointOnSphere(pointOnUnitCube);
 
-                seaVert[i] = pointOnSphere * (1 + (0.0005f) * heightScale);
+                seaVert[i] = pointOnSphere * (1 + (0.0003f) * heightScale);
                 seaUvs[i] = Lib.PointToCoordinate(pointOnSphere).ToUV();
                 
                 if (x != seaRes - 1 && y != seaRes - 1)
@@ -163,7 +173,8 @@ public class MeshThread : MonoBehaviour
         Vector2 c = Lib.PointToCoordinate(posReal).ToUV();
         int u = Mathf.FloorToInt(c.x * width);
         int v = Mathf.FloorToInt(c.y * height);
-        float h = Mathf.Floor(heightMap[u][v].r * numberOfHeightLayers);
-        return new Node(posReal, h, i);
+        int h = Mathf.FloorToInt(heightMap[u][v].r * numberOfHeightLayers);
+        
+        return new Node(posReal * (1 + 0.01f * i), c , h, i);
     }
 }

@@ -435,6 +435,30 @@ PrefabInstance:
       propertyPath: heightScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 466752993, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
+      propertyPath: numberOfHeightLayers
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2195358137158845682, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
+      propertyPath: MeshSettings.planeRes
+      value: 512
+      objectReference: {fileID: 0}
+    - target: {fileID: 2195358137158845682, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
+      propertyPath: WorldConfig.noise.gain
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2195358137158845682, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
+      propertyPath: WorldConfig.tex.texWidth
+      value: 2048
+      objectReference: {fileID: 0}
+    - target: {fileID: 2195358137158845682, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
+      propertyPath: WorldConfig.tex.texHeight
+      value: 1024
+      objectReference: {fileID: 0}
+    - target: {fileID: 2195358137158845682, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
+      propertyPath: MeshSettings.numSubdivisions
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 2259064609053305316, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
       propertyPath: seaParent
       value: 

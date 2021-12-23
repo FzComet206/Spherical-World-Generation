@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -168,14 +169,12 @@ public class MeshHelper: MonoBehaviour
 
     public void UpdateHeightMap()
     {
-        int w = worldGen.WorldConfig.tex.texWidth;
-        int h = worldGen.WorldConfig.tex.texHeight;
         Texture2D tex = Lib.ReadFromPng(Configurations.dirPathN);
-        meshThread.heightMap = new Color[w][];
-        for (int i = 0; i < w; i++)
+        meshThread.heightMap = new Color[tex.width][];
+        for (int i = 0; i < tex.width; i++)
         {
-            meshThread.heightMap[i] = new Color[h];
-            for (int j = 0; j < h; j++)
+            meshThread.heightMap[i] = new Color[tex.height];
+            for (int j = 0; j < tex.height; j++)
             {
                 meshThread.heightMap[i][j] = tex.GetPixel(i, j);
             }
@@ -185,7 +184,8 @@ public class MeshHelper: MonoBehaviour
     void OnChunkDataReceived(DataTypes.ChunkData data)
     {
         // obj is the game object for each chunk, and is populated with layers of marching squared meshes
-        GameObject obj = new GameObject("Chunk", typeof(MeshFilter), typeof(MeshRenderer), typeof(MeshCollider));
+        GameObject obj = new GameObject("Chunk");
+        
         for (int i = 0; i < data.triangles.Count; i++)
         {
             Mesh mesh = new Mesh();
@@ -193,8 +193,6 @@ public class MeshHelper: MonoBehaviour
             mesh.vertices = data.verticies[i];
             mesh.triangles = data.triangles[i];
             mesh.uv = data.Uvs[i];
-            mesh.RecalculateNormals();
-            mesh.RecalculateBounds();
             
             GameObject l = new GameObject("Layer", typeof(MeshFilter), typeof(MeshRenderer), typeof(MeshCollider));
             l.GetComponent<MeshFilter>().sharedMesh = mesh;
@@ -202,8 +200,9 @@ public class MeshHelper: MonoBehaviour
             l.GetComponent<MeshCollider>().sharedMesh = mesh;
             l.transform.parent = obj.transform;
         }
+
+        obj.transform.parent = meshParent;
         meshDictionary[data.index] = obj;
-        
         
         Mesh sea = new Mesh();
         sea.indexFormat = IndexFormat.UInt32;
