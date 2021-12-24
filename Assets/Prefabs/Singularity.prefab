@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MeshSettings:
-    planeRes: 512
+    planeRes: 128
     numSubdivisions: 16
     generateAll: 1
     RenderDistance: 1
@@ -60,9 +60,9 @@ MonoBehaviour:
       seed0: 0
       seed1: 0
       seed2: 0
-      scale: 2000
+      scale: 2300
       octaves: 5
-      gain: 0.1
+      gain: 0.3
       lacunarity: 1.5
       altitudeTurbulenceScale: 0
       altitudeTurbulenceAmplitude: 0
@@ -119,4 +119,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c153e106d5f78a44b6acafb03f1b3f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  heightScale: 0
+  heightScale: 5
+  numberOfHeightLayers: 15
+  cliffHeight: 0.01

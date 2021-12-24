@@ -62,13 +62,26 @@ public class Square
                 break;
             
             case 1:
+                vertexList.Add(bottomLeft.position);
                 vertexList.Add(centerLeft.position);
                 vertexList.Add(centerBot.position);
-                vertexList.Add(centerLeft.position);
                 
-                
+                uvList.Add(bottomLeft.uv);
                 uvList.Add(centerLeft.uv);
                 uvList.Add(centerBot.uv);
+
+                vertexList.Add(centerBot.position);
+                vertexList.Add(centerLeft.position * (1 - cliffHeight));
+                vertexList.Add(centerBot.position * (1 - cliffHeight));
+                vertexList.Add(centerBot.position);
+                vertexList.Add(centerLeft.position);
+                vertexList.Add(centerLeft.position * (1 - cliffHeight));
+                
+                uvList.Add(centerBot.uv);
+                uvList.Add(centerLeft.uv);
+                uvList.Add(centerBot.uv);
+                uvList.Add(centerBot.uv);
+                uvList.Add(centerLeft.uv);
                 uvList.Add(centerLeft.uv);
                 break;
 
@@ -76,17 +89,30 @@ public class Square
                 vertexList.Add(centerBot.position);
                 vertexList.Add(centerRight.position);
                 vertexList.Add(bottomRight.position);
-
+                
                 uvList.Add(centerBot.uv);
                 uvList.Add(centerRight.uv);
                 uvList.Add(bottomRight.uv);
+
+                vertexList.Add(centerBot.position);
+                vertexList.Add(centerBot.position * (1 - cliffHeight));
+                vertexList.Add(centerRight.position);
+                vertexList.Add(centerBot.position * (1 - cliffHeight));
+                vertexList.Add(centerRight.position * (1 - cliffHeight));
+                vertexList.Add(centerRight.position);
+                
+                uvList.Add(centerBot.uv);
+                uvList.Add(centerBot.uv);
+                uvList.Add(centerRight.uv);
+                uvList.Add(centerBot.uv);
+                uvList.Add(centerRight.uv);
+                uvList.Add(centerRight.uv);
                 break;
 
             case 3:
                 vertexList.Add(centerLeft.position);
                 vertexList.Add(bottomRight.position);
                 vertexList.Add(bottomLeft.position);
-                
                 vertexList.Add(centerLeft.position);
                 vertexList.Add(centerRight.position);
                 vertexList.Add(bottomRight.position);
@@ -97,6 +123,20 @@ public class Square
                 uvList.Add(centerLeft.uv);
                 uvList.Add(centerRight.uv);
                 uvList.Add(bottomRight.uv);
+                
+                vertexList.Add(centerLeft.position);
+                vertexList.Add(centerLeft.position * (1 - cliffHeight));
+                vertexList.Add(centerRight.position);
+                vertexList.Add(centerLeft.position * (1 - cliffHeight));
+                vertexList.Add(centerRight.position * (1 - cliffHeight));
+                vertexList.Add(centerRight.position);
+                
+                uvList.Add(centerLeft.uv);
+                uvList.Add(centerLeft.uv);
+                uvList.Add(centerRight.uv);
+                uvList.Add(centerLeft.uv);
+                uvList.Add(centerRight.uv);
+                uvList.Add(centerRight.uv);
                 break;
 
             case 4:
@@ -107,25 +147,35 @@ public class Square
                 uvList.Add(centerTop.uv);
                 uvList.Add(topRight.uv);
                 uvList.Add(centerRight.uv);
+                
+                vertexList.Add(centerTop.position);
+                vertexList.Add(centerRight.position * (1 - cliffHeight));
+                vertexList.Add(centerTop.position * (1 - cliffHeight));
+                vertexList.Add(centerTop.position);
+                vertexList.Add(centerRight.position);
+                vertexList.Add(centerRight.position * (1 - cliffHeight));
+                
+                uvList.Add(centerTop.uv);
+                uvList.Add(centerRight.uv);
+                uvList.Add(centerTop.uv);
+                uvList.Add(centerTop.uv);
+                uvList.Add(centerRight.uv);
+                uvList.Add(centerRight.uv);
                 break;
 
             case 5:
                 vertexList.Add(centerLeft.position);
                 vertexList.Add(centerBot.position);
                 vertexList.Add(bottomLeft.position);
-                
                 vertexList.Add(centerLeft.position);
                 vertexList.Add(centerTop.position);
                 vertexList.Add(centerBot.position);
-                
                 vertexList.Add(centerTop.position);
                 vertexList.Add(centerRight.position);
                 vertexList.Add(centerBot.position);
-                
                 vertexList.Add(centerTop.position);
                 vertexList.Add(topRight.position);
                 vertexList.Add(centerRight.position);
-
                 
                 uvList.Add(centerLeft.uv);
                 uvList.Add(centerBot.uv);
@@ -139,13 +189,38 @@ public class Square
                 uvList.Add(centerTop.uv);
                 uvList.Add(topRight.uv);
                 uvList.Add(centerRight.uv);
+                
+                vertexList.Add(centerLeft.position);
+                vertexList.Add(centerLeft.position * (1 - cliffHeight));
+                vertexList.Add(centerTop.position * (1 - cliffHeight));
+                vertexList.Add(centerLeft.position * (1 - cliffHeight));
+                vertexList.Add(centerTop.position * (1 - cliffHeight));
+                vertexList.Add(centerTop.position);
+                vertexList.Add(centerRight.position);
+                vertexList.Add(centerRight.position * (1 - cliffHeight));
+                vertexList.Add(centerBot.position);
+                vertexList.Add(centerRight.position * (1 - cliffHeight));
+                vertexList.Add(centerBot.position * (1 - cliffHeight));
+                vertexList.Add(centerBot.position);
+                
+                uvList.Add(centerLeft.uv);
+                uvList.Add(centerLeft.uv);
+                uvList.Add(centerTop.uv);
+                uvList.Add(centerLeft.uv);
+                uvList.Add(centerTop.uv);
+                uvList.Add(centerTop.uv);
+                uvList.Add(centerRight.uv);
+                uvList.Add(centerRight.uv);
+                uvList.Add(centerBot.uv);
+                uvList.Add(centerRight.uv);
+                uvList.Add(centerBot.uv);
+                uvList.Add(centerBot.uv);
                 break;
 
             case 6:
                 vertexList.Add(centerTop.position);
                 vertexList.Add(bottomRight.position);
                 vertexList.Add(centerBot.position);
-                
                 vertexList.Add(centerTop.position);
                 vertexList.Add(topRight.position);
                 vertexList.Add(bottomRight.position);
@@ -156,17 +231,29 @@ public class Square
                 uvList.Add(centerTop.uv);
                 uvList.Add(topRight.uv);
                 uvList.Add(bottomRight.uv);
+                
+                vertexList.Add(centerTop.position);
+                vertexList.Add(centerBot.position * (1 - cliffHeight));
+                vertexList.Add(centerTop.position * (1 - cliffHeight));
+                vertexList.Add(centerBot.position);
+                vertexList.Add(centerBot.position * (1 - cliffHeight));
+                vertexList.Add(centerTop.position);
+                
+                uvList.Add(centerTop.uv);
+                uvList.Add(centerBot.uv);
+                uvList.Add(centerTop.uv);
+                uvList.Add(centerBot.uv);
+                uvList.Add(centerBot.uv);
+                uvList.Add(centerTop.uv);
                 break;
 
             case 7:
                 vertexList.Add(centerLeft.position);
                 vertexList.Add(bottomRight.position);
                 vertexList.Add(bottomLeft.position);
-                
                 vertexList.Add(centerLeft.position);
                 vertexList.Add(centerTop.position);
                 vertexList.Add(bottomRight.position);
-                
                 vertexList.Add(centerTop.position);
                 vertexList.Add(topRight.position);
                 vertexList.Add(bottomRight.position);
@@ -180,6 +267,20 @@ public class Square
                 uvList.Add(centerTop.uv);
                 uvList.Add(topRight.uv);
                 uvList.Add(bottomRight.uv);
+                
+                vertexList.Add(centerLeft.position);
+                vertexList.Add(centerLeft.position * (1 - cliffHeight));
+                vertexList.Add(centerTop.position);
+                vertexList.Add(centerLeft.position * (1 - cliffHeight));
+                vertexList.Add(centerTop.position * (1 - cliffHeight));
+                vertexList.Add(centerTop.position);
+                
+                uvList.Add(centerLeft.uv);
+                uvList.Add(centerLeft.uv);
+                uvList.Add(centerTop.uv);
+                uvList.Add(centerLeft.uv);
+                uvList.Add(centerTop.uv);
+                uvList.Add(centerTop.uv);
                 break;
 
             case 8:
@@ -190,13 +291,26 @@ public class Square
                 uvList.Add(topLeft.uv);
                 uvList.Add(centerTop.uv);
                 uvList.Add(centerLeft.uv);
+                
+                vertexList.Add(centerTop.position);
+                vertexList.Add(centerTop.position * (1 - cliffHeight));
+                vertexList.Add(centerLeft.position);
+                vertexList.Add(centerLeft.position);
+                vertexList.Add(centerTop.position * (1 - cliffHeight));
+                vertexList.Add(centerLeft.position * (1 - cliffHeight));
+                
+                uvList.Add(centerTop.uv);
+                uvList.Add(centerTop.uv);
+                uvList.Add(centerLeft.uv);
+                uvList.Add(centerLeft.uv);
+                uvList.Add(centerTop.uv);
+                uvList.Add(centerLeft.uv);
                 break;
 
             case 9:
                 vertexList.Add(topLeft.position);
                 vertexList.Add(centerBot.position);
                 vertexList.Add(bottomLeft.position);
-                
                 vertexList.Add(topLeft.position);
                 vertexList.Add(centerTop.position);
                 vertexList.Add(centerBot.position);
@@ -207,21 +321,32 @@ public class Square
                 uvList.Add(topLeft.uv);
                 uvList.Add(centerTop.uv);
                 uvList.Add(centerBot.uv);
+                
+                vertexList.Add(centerTop.position);
+                vertexList.Add(centerBot.position * (1 - cliffHeight));
+                vertexList.Add(centerBot.position);
+                vertexList.Add(centerTop.position * (1 - cliffHeight));
+                vertexList.Add(centerBot.position * (1 - cliffHeight));
+                vertexList.Add(centerTop.position);
+                
+                uvList.Add(centerTop.uv);
+                uvList.Add(centerBot.uv);
+                uvList.Add(centerBot.uv);
+                uvList.Add(centerTop.uv);
+                uvList.Add(centerBot.uv);
+                uvList.Add(centerTop.uv);
                 break;
 
             case 10:
                 vertexList.Add(topLeft.position);
                 vertexList.Add(centerTop.position);
                 vertexList.Add(centerLeft.position);
-                
                 vertexList.Add(centerTop.position);
                 vertexList.Add(centerBot.position);
                 vertexList.Add(centerLeft.position);
-                
                 vertexList.Add(centerTop.position);
                 vertexList.Add(centerRight.position);
                 vertexList.Add(centerBot.position);
-                
                 vertexList.Add(centerRight.position);
                 vertexList.Add(bottomRight.position);
                 vertexList.Add(centerBot.position);
@@ -238,17 +363,43 @@ public class Square
                 uvList.Add(centerRight.uv);
                 uvList.Add(bottomRight.uv);
                 uvList.Add(centerBot.uv);
+                
+                vertexList.Add(centerLeft.position);
+                vertexList.Add(centerBot.position * (1 - cliffHeight));
+                vertexList.Add(centerLeft.position * (1 - cliffHeight));
+                vertexList.Add(centerLeft.position);
+                vertexList.Add(centerBot.position);
+                vertexList.Add(centerBot.position * (1 - cliffHeight));
+                
+                vertexList.Add(centerTop.position);
+                vertexList.Add(centerTop.position * (1 - cliffHeight));
+                vertexList.Add(centerRight.position * (1 - cliffHeight));
+                vertexList.Add(centerTop.position);
+                vertexList.Add(centerRight.position * (1 - cliffHeight));
+                vertexList.Add(centerRight.position);
+                
+                uvList.Add(centerLeft.uv);
+                uvList.Add(centerBot.uv);
+                uvList.Add(centerLeft.uv);
+                uvList.Add(centerLeft.uv);
+                uvList.Add(centerBot.uv);
+                uvList.Add(centerBot.uv);
+                
+                uvList.Add(centerTop.uv);
+                uvList.Add(centerTop.uv);
+                uvList.Add(centerRight.uv);
+                uvList.Add(centerTop.uv);
+                uvList.Add(centerRight.uv);
+                uvList.Add(centerRight.uv);
                 break;
 
             case 11:
                 vertexList.Add(topLeft.position);
                 vertexList.Add(centerTop.position);
                 vertexList.Add(bottomLeft.position);
-                
                 vertexList.Add(centerTop.position);
                 vertexList.Add(centerRight.position);
                 vertexList.Add(bottomLeft.position);
-                
                 vertexList.Add(centerRight.position);
                 vertexList.Add(bottomRight.position);
                 vertexList.Add(bottomLeft.position);
@@ -262,6 +413,21 @@ public class Square
                 uvList.Add(centerRight.uv);
                 uvList.Add(bottomRight.uv);
                 uvList.Add(bottomLeft.uv);
+                
+                vertexList.Add(centerTop.position);
+                vertexList.Add(centerTop.position * (1 - cliffHeight));
+                vertexList.Add(centerRight.position);
+                vertexList.Add(centerTop.position * (1 - cliffHeight));
+                vertexList.Add(centerRight.position * (1 - cliffHeight));
+                vertexList.Add(centerRight.position);
+                
+                uvList.Add(centerTop.uv);
+                uvList.Add(centerTop.uv);
+                uvList.Add(centerRight.uv);
+                uvList.Add(centerTop.uv);
+                uvList.Add(centerRight.uv);
+                uvList.Add(centerTop.uv);
+                
                 break;
 
             case 12:
@@ -279,17 +445,31 @@ public class Square
                 uvList.Add(topLeft.uv);
                 uvList.Add(topRight.uv);
                 uvList.Add(centerRight.uv);
+                
+                vertexList.Add(centerRight.position);
+                vertexList.Add(centerLeft.position * (1 - cliffHeight));
+                vertexList.Add(centerLeft.position);
+                
+                vertexList.Add(centerRight.position);
+                vertexList.Add(centerRight.position * (1 - cliffHeight));
+                vertexList.Add(centerLeft.position * (1 - cliffHeight));
+                
+                uvList.Add(centerRight.uv);
+                uvList.Add(centerLeft.uv);
+                uvList.Add(centerLeft.uv);
+                
+                uvList.Add(centerRight.uv);
+                uvList.Add(centerRight.uv);
+                uvList.Add(centerLeft.uv);
                 break;
 
             case 13:
                 vertexList.Add(topLeft.position);
                 vertexList.Add(centerBot.position);
                 vertexList.Add(bottomLeft.position);
-                
                 vertexList.Add(topLeft.position);
                 vertexList.Add(centerRight.position);
                 vertexList.Add(centerBot.position);
-                
                 vertexList.Add(topLeft.position);
                 vertexList.Add(topRight.position);
                 vertexList.Add(centerRight.position);
@@ -303,17 +483,29 @@ public class Square
                 uvList.Add(topLeft.uv);
                 uvList.Add(topRight.uv);
                 uvList.Add(centerRight.uv);
+                
+                vertexList.Add(centerRight.position);
+                vertexList.Add(centerRight.position * (1 - cliffHeight));
+                vertexList.Add(centerBot.position);
+                vertexList.Add(centerRight.position * (1 - cliffHeight));
+                vertexList.Add(centerBot.position * (1 - cliffHeight));
+                vertexList.Add(centerBot.position);
+                
+                uvList.Add(centerRight.uv);
+                uvList.Add(centerRight.uv);
+                uvList.Add(centerBot.uv);
+                uvList.Add(centerRight.uv);
+                uvList.Add(centerBot.uv);
+                uvList.Add(centerBot.uv);
                 break;
 
             case 14:
                 vertexList.Add(topLeft.position);
                 vertexList.Add(topRight.position);
                 vertexList.Add(centerLeft.position);
-                
                 vertexList.Add(centerLeft.position);
                 vertexList.Add(topRight.position);
                 vertexList.Add(centerBot.position);
-                
                 vertexList.Add(centerBot.position);
                 vertexList.Add(topRight.position);
                 vertexList.Add(bottomRight.position);
@@ -327,8 +519,21 @@ public class Square
                 uvList.Add(centerBot.uv);
                 uvList.Add(topRight.uv);
                 uvList.Add(bottomRight.uv);
+                
+                vertexList.Add(centerLeft.position);
+                vertexList.Add(centerBot.position * (1 - cliffHeight));
+                vertexList.Add(centerLeft.position * (1 - cliffHeight));
+                vertexList.Add(centerLeft.position);
+                vertexList.Add(centerBot.position);
+                vertexList.Add(centerBot.position * (1 - cliffHeight));
+                
+                uvList.Add(centerLeft.uv);
+                uvList.Add(centerBot.uv);
+                uvList.Add(centerLeft.uv);
+                uvList.Add(centerLeft.uv);
+                uvList.Add(centerBot.uv);
+                uvList.Add(centerBot.uv);
                 break;
-            default: break;
         }
     }
 }

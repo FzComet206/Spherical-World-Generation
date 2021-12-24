@@ -112,11 +112,13 @@ public class MeshThread : MonoBehaviour
 
         Vector3[] verticies = vertList.ToArray();
         Vector2[] uvs = uvList.ToArray();
-        
-        
+
+        // ???
+        vertList = null;
+        uvList = null;
         
         // below initializes sea mesh data
-        int seaRes = res / 4;
+        int seaRes = res;
         int seaVertLength = seaRes * seaRes;
         int seaTriLength = (seaRes - 1) * (seaRes - 1) * 6;
 
@@ -172,6 +174,6 @@ public class MeshThread : MonoBehaviour
         int v = Mathf.FloorToInt(c.y * height);
         int h = Mathf.FloorToInt(heightMap[u][v].r * numberOfHeightLayers);
         
-        return new Node(posReal * (1 + 0.001f * i), c , h, i, i + 1);
+        return new Node(posReal * (1 + 0.001f * i * heightScale), c , h, i, i + 1);
     }
 }

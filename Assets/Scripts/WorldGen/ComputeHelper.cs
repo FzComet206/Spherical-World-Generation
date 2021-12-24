@@ -27,7 +27,7 @@ public class ComputeHelper : MonoBehaviour
         noises.SetFloat("lacunarity", config.noise.lacunarity);
         noises.SetFloat("gain", config.noise.gain);
         
-        noises.Dispatch(handle0, config.tex.texWidth / 32, config.tex.texHeight / 32, 1);
+        noises.Dispatch(handle0, config.tex.texWidth / 16, config.tex.texHeight / 16, 1);
 
         Lib.DumpRenderTexture(noiseMap, Configurations.dirPathN, TextureFormat.RGBA32);
     }
