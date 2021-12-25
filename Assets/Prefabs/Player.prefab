@@ -290,7 +290,7 @@ MonoBehaviour:
   collider: {fileID: 0}
   isActive: 0
   gravity: 200
-  groundedDistance: 0.15
+  groundedDistance: 0
   mh: {fileID: 0}
   speed: 5
   move:
@@ -342,4 +342,4 @@ MonoBehaviour:
       m_Action: Move
       m_Flags: 8
   camPos: {fileID: 5259392167673049957}
-  useGravity: 0
+  useGravity: 1

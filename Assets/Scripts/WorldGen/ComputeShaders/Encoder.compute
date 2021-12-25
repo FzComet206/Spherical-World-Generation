@@ -1,19 +1,42 @@
 #pragma kernel NoiseGenerator
 #include "noiseSimplex.cginc"
 
-RWTexture2D<float4> NoiseMap;
+// data buffers
+RWStructuredBuffer<float> HtoTCurveSample;
+RWStructuredBuffer<float4> BiomeColors;
 
+// first iteration output
+RWTexture2D<float4> ContinentMap;
+RWTexture2D<float4> Altitude;
+RWTexture2D<float4> Proximity;
+
+// second iteration output
+RWTexture2D<float4> Temperature;
+RWTexture2D<float4> Humidity;
+RWTexture2D<float4> Elevation;
+
+// final output
+RWTexture2D<float4> BiomeMap;
+
+// texture and base noise settings
 int randSeed1;
 int randSeed2;
 int randSeed3;
+int randSeed4;
+int width;
+int height;
 int octaves;
-
 int scale;
 float gain;
 float lacunarity;
 
-int width;
-int height;
+// generator settings
+int altitudeScale;
+int altitudeAmplitude;
+
+float HtoTCurveRes;
+float AtoTWeight;
+float AtoHWeight;
 
 
 float remap(float v, float minOld, float maxOld, float minNew, float maxNew) {
@@ -67,7 +90,10 @@ void NoiseGenerator (uint3 id : SV_DispatchThreadID)
     float f = 0;
     
     if (h0 > 0.99) { f = remap(h, 0.6, 1, 0, 1);}
+    else if (subH0 > 0.99) { f = remap(subH, 0.8, 1, 0, 1);}
 
     float4 d0 = float4(f, f, f, 1);
     NoiseMap[id.xy] = d0;
 }
+
+

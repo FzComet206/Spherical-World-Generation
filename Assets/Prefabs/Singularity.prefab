@@ -47,15 +47,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MeshSettings:
-    planeRes: 128
+    planeRes: 512
     numSubdivisions: 16
-    generateAll: 1
+    generateAll: 0
     RenderDistance: 1
   WorldConfig:
     tex:
       compute: {fileID: 7200000, guid: c632a5e22c5e15c49b88fe8aa6944205, type: 3}
-      texWidth: 2048
-      texHeight: 1024
+      texWidth: 4096
+      texHeight: 2048
     noise:
       seed0: 0
       seed1: 0
@@ -77,6 +77,7 @@ MonoBehaviour:
         m_RotationOrder: 4
       curveRes: 0
       biomes: []
+  player: {fileID: 5259392167957853920, guid: 45aebc22877b8474b9992acce4a72dea, type: 3}
 --- !u!114 &2259064609053305316
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -119,6 +120,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c153e106d5f78a44b6acafb03f1b3f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  heightScale: 5
+  heightScale: 3
   numberOfHeightLayers: 15
-  cliffHeight: 0.01
+  cliffHeight: 0.005
+  vertexArrInitialCount: 3000

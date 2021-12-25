@@ -18,6 +18,7 @@ public static class DataTypes
         public int seed0;
         public int seed1;
         public int seed2;
+        public int seed3;
         
         public int scale;
         public int octaves;

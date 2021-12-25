@@ -10,7 +10,8 @@ public class MeshThread : MonoBehaviour
     public float heightScale;
     public int numberOfHeightLayers;
     public float cliffHeight;
-    
+    public int vertexArrInitialCount;
+
     public Queue<DataTypes.MapThreadInfo> threadInfoQueue = new Queue<DataTypes.MapThreadInfo>();
     public Color[][] heightMap;
 
@@ -59,14 +60,16 @@ public class MeshThread : MonoBehaviour
     
         // below initializes main return data
 
-        List<Vector3> vertList = new List<Vector3>();
-        List<Vector2> uvList = new List<Vector2>();
+        Vector3[] vertArr = new Vector3[vertexArrInitialCount];
+        Vector2[] uvArr = new Vector2[vertexArrInitialCount];
         
         float dx = (endT.x - startT.x) / (res - 1);
         float dy = (endT.y - startT.y) / (res - 1);
 
         int width = heightMap.Length - 1;
         int height = heightMap[0].Length - 1;
+
+        int numVertex = 0;
 
         // for each square, generate 8 vertex index and 8 vertex position
         for (int i = 0; i < numberOfHeightLayers; i++)
@@ -95,7 +98,7 @@ public class MeshThread : MonoBehaviour
                     {
                         Square march = new Square(centerLeft, centerTop, centerRight, centerBot,
                             topLeft, topRight, bottomRight, bottomLeft);
-                        march.March(vertList, uvList, cliffHeight);
+                        numVertex = march.March(vertArr, uvArr, numVertex, cliffHeight);
                     }
                     
                     tx += dx;
@@ -104,18 +107,19 @@ public class MeshThread : MonoBehaviour
             }
         }
 
-        int[] triangles = new int[vertList.Count];
-        for (int i = 0; i < vertList.Count; i++)
+        // truncate array
+        Vector3[] verticies = new Vector3[numVertex];
+        Vector2[] uvs = new Vector2[numVertex];
+
+        
+        Array.Copy(vertArr, verticies, numVertex);
+        Array.Copy(uvArr, uvs, numVertex);
+        
+        int[] triangles = new int[numVertex];
+        for (int i = 0; i < numVertex; i++)
         {
             triangles[i] = i;
         }
-
-        Vector3[] verticies = vertList.ToArray();
-        Vector2[] uvs = uvList.ToArray();
-
-        // ???
-        vertList = null;
-        uvList = null;
         
         // below initializes sea mesh data
         int seaRes = res;

@@ -170,7 +170,7 @@ public class MeshHelper: MonoBehaviour
 
     public void UpdateHeightMap()
     {
-        Texture2D tex = Lib.ReadFromPng(Configurations.dirPathN);
+        Texture2D tex = Lib.ReadFromPng(Configurations.dirPathContinent);
         meshThread.heightMap = new Color[tex.width][];
         for (int i = 0; i < tex.width; i++)
         {
@@ -192,6 +192,9 @@ public class MeshHelper: MonoBehaviour
         mesh.vertices = data.verticies;
         mesh.triangles = data.triangles;
         mesh.uv = data.Uvs;
+        
+        mesh.RecalculateBounds();
+        mesh.RecalculateNormals();
 
         obj.GetComponent<MeshFilter>().sharedMesh = mesh;
         obj.GetComponent<MeshCollider>().sharedMesh = mesh;
@@ -199,6 +202,8 @@ public class MeshHelper: MonoBehaviour
 
         obj.transform.parent = meshParent;
         meshDictionary[data.index] = obj;
+        
+        
         
         Mesh sea = new Mesh();
         sea.indexFormat = IndexFormat.UInt32;
@@ -212,7 +217,6 @@ public class MeshHelper: MonoBehaviour
         GameObject seaPiece = new GameObject("SeaChunk", typeof(MeshFilter), typeof(MeshRenderer));
         seaPiece.GetComponent<MeshFilter>().sharedMesh = sea;
         seaPiece.GetComponent<MeshRenderer>().material = seaMaterial;
-        seaPiece.GetComponent<MeshRenderer>().shadowCastingMode = ShadowCastingMode.Off;
 
         seaPiece.transform.parent = seaParent.transform;
 
