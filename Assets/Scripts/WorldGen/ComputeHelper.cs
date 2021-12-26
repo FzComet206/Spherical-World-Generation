@@ -29,17 +29,17 @@ public class ComputeHelper : MonoBehaviour
         RenderTexture continentMap = new RenderTexture(config.tex.texWidth, config.tex.texHeight, 1) {enableRandomWrite = true};
         RenderTexture altitudeMap = new RenderTexture(config.tex.texWidth, config.tex.texHeight, 1) {enableRandomWrite = true};
         RenderTexture proximityMap = new RenderTexture(config.tex.texWidth, config.tex.texHeight, 1) {enableRandomWrite = true};
+        RenderTexture elevationMap = new RenderTexture(config.tex.texWidth, config.tex.texHeight, 1) {enableRandomWrite = true};
         continentMap.Create();
         altitudeMap.Create();
         proximityMap.Create();
+        elevationMap.Create();
         
         // second iteration output
         RenderTexture temperatureMap = new RenderTexture(config.tex.texWidth, config.tex.texHeight, 1) {enableRandomWrite = true};
         RenderTexture humidityMap = new RenderTexture(config.tex.texWidth, config.tex.texHeight, 1) {enableRandomWrite = true};
-        RenderTexture elevationMap = new RenderTexture(config.tex.texWidth, config.tex.texHeight, 1) {enableRandomWrite = true};
         temperatureMap.Create();
         humidityMap.Create();
-        elevationMap.Create();
         
         // final output
         RenderTexture biomeMap = new RenderTexture(config.tex.texWidth, config.tex.texHeight, 1) {enableRandomWrite = true};
@@ -51,13 +51,13 @@ public class ComputeHelper : MonoBehaviour
         noises.SetBuffer(handle, "HtoTCurveSample", HToTCurveSample);
         noises.SetBuffer(handle, "BiomeColors", BiomeColor);
         
+        noises.SetTexture(handle, "Elevation", elevationMap);
         noises.SetTexture(handle, "ContinentMap", continentMap);
         noises.SetTexture(handle, "Altitude", altitudeMap);
         noises.SetTexture(handle, "Proximity", proximityMap);
         
         noises.SetTexture(handle, "Temperature", temperatureMap);
         noises.SetTexture(handle, "Humidity", humidityMap);
-        noises.SetTexture(handle, "Elevation", elevationMap);
         
         noises.SetTexture(handle, "BiomeMap", biomeMap);
         
@@ -72,9 +72,16 @@ public class ComputeHelper : MonoBehaviour
         noises.SetInt("scale", config.noise.scale);
         noises.SetFloat("lacunarity", config.noise.lacunarity);
         noises.SetFloat("gain", config.noise.gain);
+        noises.SetInt("altitudeScale", config.noise.altitudeTurbulenceScale);
+        noises.SetInt("altitudeAmplitude", config.noise.altitudeTurbulenceAmplitude);
+        noises.SetFloat("AtoTWeight", config.noise.altitudeToTemperatureWeight);
+        noises.SetFloat("AtoHWeight", config.noise.altitudeToHumidityWeight);
         
         // brrrrr
         noises.Dispatch(handle, config.tex.texWidth / 16, config.tex.texHeight / 16, 1);
+        
+        HToTCurveSample.Dispose();
+        BiomeColor.Dispose();
         
         // save
         Lib.DumpRenderTexture(continentMap, Configurations.dirPathContinent, TextureFormat.RGBA32);

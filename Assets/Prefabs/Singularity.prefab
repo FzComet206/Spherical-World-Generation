@@ -47,9 +47,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MeshSettings:
-    planeRes: 512
+    planeRes: 128
     numSubdivisions: 16
-    generateAll: 0
+    generateAll: 1
     RenderDistance: 1
   WorldConfig:
     tex:
@@ -60,23 +60,114 @@ MonoBehaviour:
       seed0: 0
       seed1: 0
       seed2: 0
+      seed3: 0
       scale: 2300
       octaves: 5
       gain: 0.3
       lacunarity: 1.5
-      altitudeTurbulenceScale: 0
-      altitudeTurbulenceAmplitude: 0
-      altitudeToTemperatureWeight: 0
-      altitudeToHumidityWeight: 0
+      altitudeTurbulenceScale: 2300
+      altitudeTurbulenceAmplitude: 200
+      altitudeToTemperatureWeight: 0.9
+      altitudeToHumidityWeight: 0.6
     biomes:
       humidityToTemperatureCurve:
         serializedVersion: 2
-        m_Curve: []
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 0
+          inSlope: 2
+          outSlope: 2
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        - serializedVersion: 3
+          time: 1
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-      curveRes: 0
-      biomes: []
+      curveRes: 1024
+      biomes:
+      - name: 
+        heightCurve:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 0
+          m_PostInfinity: 0
+          m_RotationOrder: 0
+        colorCode: {r: 0, g: 0, b: 0, a: 0}
+      - name: 
+        heightCurve:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 0
+          m_PostInfinity: 0
+          m_RotationOrder: 0
+        colorCode: {r: 0, g: 0, b: 0, a: 0}
+      - name: 
+        heightCurve:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 0
+          m_PostInfinity: 0
+          m_RotationOrder: 0
+        colorCode: {r: 0, g: 0, b: 0, a: 0}
+      - name: 
+        heightCurve:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 0
+          m_PostInfinity: 0
+          m_RotationOrder: 0
+        colorCode: {r: 0, g: 0, b: 0, a: 0}
+      - name: 
+        heightCurve:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 0
+          m_PostInfinity: 0
+          m_RotationOrder: 0
+        colorCode: {r: 0, g: 0, b: 0, a: 0}
+      - name: 
+        heightCurve:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 0
+          m_PostInfinity: 0
+          m_RotationOrder: 0
+        colorCode: {r: 0, g: 0, b: 0, a: 0}
+      - name: 
+        heightCurve:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 0
+          m_PostInfinity: 0
+          m_RotationOrder: 0
+        colorCode: {r: 0, g: 0, b: 0, a: 0}
+      - name: 
+        heightCurve:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 0
+          m_PostInfinity: 0
+          m_RotationOrder: 0
+        colorCode: {r: 0, g: 0, b: 0, a: 0}
+      - name: 
+        heightCurve:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 0
+          m_PostInfinity: 0
+          m_RotationOrder: 0
+        colorCode: {r: 0, g: 0, b: 0, a: 0}
   player: {fileID: 5259392167957853920, guid: 45aebc22877b8474b9992acce4a72dea, type: 3}
 --- !u!114 &2259064609053305316
 MonoBehaviour:
@@ -120,7 +211,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c153e106d5f78a44b6acafb03f1b3f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  heightScale: 3
-  numberOfHeightLayers: 15
-  cliffHeight: 0.005
-  vertexArrInitialCount: 3000
+  heightScale: 1
+  numberOfHeightLayers: 10
+  cliffHeight: 0.001
+  vertexArrInitialCount: 30000

@@ -431,41 +431,13 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 466752993, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
-      propertyPath: cliffHeight
-      value: 0.002
-      objectReference: {fileID: 0}
-    - target: {fileID: 466752993, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
-      propertyPath: heightScale
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 466752993, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
-      propertyPath: numberOfHeightLayers
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 466752993, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
-      propertyPath: vertexArrInitialCount
-      value: 30000
+    - target: {fileID: 2195358137158845682, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
+      propertyPath: WorldConfig.noise.altitudeToHumidityWeight
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 2195358137158845682, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
-      propertyPath: MeshSettings.planeRes
-      value: 512
-      objectReference: {fileID: 0}
-    - target: {fileID: 2195358137158845682, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
-      propertyPath: WorldConfig.noise.scale
-      value: 2000
-      objectReference: {fileID: 0}
-    - target: {fileID: 2195358137158845682, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
-      propertyPath: MeshSettings.generateAll
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2195358137158845682, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
-      propertyPath: WorldConfig.tex.texWidth
-      value: 2048
-      objectReference: {fileID: 0}
-    - target: {fileID: 2195358137158845682, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
-      propertyPath: WorldConfig.tex.texHeight
-      value: 1024
+      propertyPath: WorldConfig.noise.altitudeToTemperatureWeight
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 2259064609053305316, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
       propertyPath: seaParent

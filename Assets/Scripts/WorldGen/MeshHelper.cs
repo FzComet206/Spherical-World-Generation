@@ -170,7 +170,7 @@ public class MeshHelper: MonoBehaviour
 
     public void UpdateHeightMap()
     {
-        Texture2D tex = Lib.ReadFromPng(Configurations.dirPathContinent);
+        Texture2D tex = Lib.ReadFromPng(Configurations.dirPathProximity);
         meshThread.heightMap = new Color[tex.width][];
         for (int i = 0; i < tex.width; i++)
         {
@@ -196,7 +196,7 @@ public class MeshHelper: MonoBehaviour
         mesh.RecalculateBounds();
         mesh.RecalculateNormals();
 
-        obj.GetComponent<MeshFilter>().sharedMesh = mesh;
+        obj.GetComponent<MeshFilter>().mesh = mesh;
         obj.GetComponent<MeshCollider>().sharedMesh = mesh;
         obj.GetComponent<MeshRenderer>().material = meshMaterial;
 

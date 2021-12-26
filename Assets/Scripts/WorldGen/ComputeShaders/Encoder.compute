@@ -9,11 +9,11 @@ RWStructuredBuffer<float4> BiomeColors;
 RWTexture2D<float4> ContinentMap;
 RWTexture2D<float4> Altitude;
 RWTexture2D<float4> Proximity;
+RWTexture2D<float4> Elevation;
 
 // second iteration output
 RWTexture2D<float4> Temperature;
 RWTexture2D<float4> Humidity;
-RWTexture2D<float4> Elevation;
 
 // final output
 RWTexture2D<float4> BiomeMap;
@@ -77,6 +77,7 @@ void NoiseGenerator (uint3 id : SV_DispatchThreadID)
     float _x = remap(id.x, 0, width, 0, 1);
     float _y = remap(id.y, 0, height, 0, 1);
 
+    // forgot why i would multiply this by 2048 but whatever
     float3 v = latLongToPoint((_y * p) - p / 2, (_x * p * 2) - p) * 2048;
     float3 mainV = float3(v.x + randSeed1, v.y + randSeed1, v.z + randSeed1);
     float3 subV = float3(v.x + randSeed2 + 100, v.y + randSeed2 + 100, v.z + randSeed2 + 100);
@@ -87,13 +88,63 @@ void NoiseGenerator (uint3 id : SV_DispatchThreadID)
     float h0 = step(0.6, h);
     float subH0 = step(0.8, subH);
     
-    float f = 0;
-    
-    if (h0 > 0.99) { f = remap(h, 0.6, 1, 0, 1);}
-    else if (subH0 > 0.99) { f = remap(subH, 0.8, 1, 0, 1);}
+    float f0 = 0;
 
-    float4 d0 = float4(f, f, f, 1);
-    NoiseMap[id.xy] = d0;
+    float case1 = remap(h, 0.6, 1, 0, 1);
+    float case2 = remap(subH, 0.8, 1, 0, 0.6);
+    float case0 = max(case1, case2);
+    
+    if (h0 > 0.99 && subH0 > 0.99) { f0 = case0; }
+    else if (h0 > 0.99) { f0 = case1; }
+    else if (subH0 > 0.99) { f0 = case2; }
+
+    float f1 = step(1, h0 + subH0);
+
+    // altitude
+    float3 n3 = float3(v.x + randSeed3, v.y + randSeed3, v.z + randSeed3);
+
+    int d = id.y + fbm(n3 / altitudeScale) * altitudeAmplitude;
+    float mid = (float) height / 2.;
+    if (d < 0) { d += height; } else if (d > height) { d -= height; }
+    float f2 = 1 - abs(d - mid) / mid;
+    
+    float4 d0 = float4(f0, f0, f0, 1);
+    Proximity[id.xy] = d0;
+    float4 d1 = float4(f1, f1, f1, 1);
+    ContinentMap[id.xy] = d1;
+    float4 d2 = float4(f2, f2, f2, 1);
+    Altitude[id.xy] = d2;
+
+    // computing elevation
+    float3 elevationV = float3(v.x + randSeed4, v.y + randSeed4, v.z + randSeed4);
+    float f3 = (fbm(elevationV / scale * 2) + 1) / 2;
+    float d3 = float4(f3, f3, f3, 1);
+    Elevation[id.xy] = d3;
+
+    // computing temperature
+    const float aToTCompliment = 1 - AtoTWeight;
+    
+    float proximity = Proximity[id.xy].r;
+    float altitude = Altitude[id.xy].r;
+    float elevation = Elevation[id.xy].r;
+
+    // higher altitude means lower temperature
+    // higher elevation means lower temperature
+    // farther from sea means temperature gets multiplied 
+
+    // altitude approach middle and proximity approach low means higher temperature
+    float temperatureRaw = altitude * AtoTWeight + (1 - elevation) * aToTCompliment;
+
+    // skew temperature toward 0 or 1 if they are away from 0.5 in case proximity is high
+    // 0.7 is a fairly balanced constant
+    float temperature =
+        min(1, (1 - (0.7 - temperatureRaw)) * temperatureRaw * proximity + (1 - proximity) * temperatureRaw);
+
+    Temperature[id.xy] = float4(temperature, temperature, temperature, 1);
+
+    // altitude approach middle and proximity approach low means higher humidity
+    float v1 = altitude * 0.25 + (1 - proximity) * 0.5 + (1 - elevation) * 0.25;
+    Humidity[id.xy] = float4(v1, v1, v1, 1);
 }
 
 
