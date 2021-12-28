@@ -1,8 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Text;
-using Unity.Mathematics;
-using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 
 public class ComputeHelper : MonoBehaviour
@@ -47,19 +42,17 @@ public class ComputeHelper : MonoBehaviour
         
         // set data
         int handle = noises.FindKernel("NoiseGenerator");
-        
-        noises.SetBuffer(handle, "HtoTCurveSample", HToTCurveSample);
-        noises.SetBuffer(handle, "BiomeColors", BiomeColor);
+        int handle1 = noises.FindKernel("BiomeGenerator");
         
         noises.SetTexture(handle, "Elevation", elevationMap);
         noises.SetTexture(handle, "ContinentMap", continentMap);
         noises.SetTexture(handle, "Altitude", altitudeMap);
         noises.SetTexture(handle, "Proximity", proximityMap);
-        
         noises.SetTexture(handle, "Temperature", temperatureMap);
         noises.SetTexture(handle, "Humidity", humidityMap);
         
-        noises.SetTexture(handle, "BiomeMap", biomeMap);
+        noises.SetBuffer(handle1, "HtoTCurveSample", HToTCurveSample);
+        noises.SetBuffer(handle1, "BiomeColors", BiomeColor);
         
         // texture and noises settings
         noises.SetInt("randSeed1", config.noise.seed0);
@@ -76,6 +69,7 @@ public class ComputeHelper : MonoBehaviour
         noises.SetInt("altitudeAmplitude", config.noise.altitudeTurbulenceAmplitude);
         noises.SetFloat("AtoTWeight", config.noise.altitudeToTemperatureWeight);
         noises.SetFloat("AtoHWeight", config.noise.altitudeToHumidityWeight);
+        noises.SetInt("HtoTCurveRes", config.biomes.curveRes);
         
         // brrrrr
         noises.Dispatch(handle, config.tex.texWidth / 16, config.tex.texHeight / 16, 1);
@@ -87,8 +81,10 @@ public class ComputeHelper : MonoBehaviour
         Lib.DumpRenderTexture(continentMap, Configurations.dirPathContinent, TextureFormat.RGBA32);
         Lib.DumpRenderTexture(altitudeMap, Configurations.dirPathAltitude, TextureFormat.RGBA32);
         Lib.DumpRenderTexture(proximityMap, Configurations.dirPathProximity, TextureFormat.RGBA32);
+        
         Lib.DumpRenderTexture(temperatureMap, Configurations.dirPathTemerature, TextureFormat.RGBA32);
         Lib.DumpRenderTexture(humidityMap, Configurations.dirPathHumidity, TextureFormat.RGBA32);
+        
         Lib.DumpRenderTexture(elevationMap, Configurations.dirPathElevation, TextureFormat.RGBA32);
         Lib.DumpRenderTexture(biomeMap, Configurations.dirPathBiomes, TextureFormat.RGBA32);
     }

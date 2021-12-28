@@ -146,7 +146,7 @@ public class MeshThread : MonoBehaviour
                 Vector3 pointOnUnitCube = face + (txs - 0.5f) * 2 * config.axisA + (tys - 0.5f) * 2 * config.axisB;
                 Vector3 pointOnSphere = Lib.PointOnCubeToPointOnSphere(pointOnUnitCube);
 
-                seaVert[i] = pointOnSphere * (1 + (0.0003f) * heightScale);
+                seaVert[i] = pointOnSphere * (1 + (0.0005f) * heightScale);
                 seaUvs[i] = Lib.PointToCoordinate(pointOnSphere).ToUV();
                 
                 if (x != seaRes - 1 && y != seaRes - 1)
@@ -174,9 +174,9 @@ public class MeshThread : MonoBehaviour
         Vector3 pos = face + (tx - 0.5f) * 2 * config.axisA + (ty - 0.5f) * 2 * config.axisB;
         Vector3 posReal= Lib.PointOnCubeToPointOnSphere(pos);
         Vector2 c = Lib.PointToCoordinate(posReal).ToUV();
-        int u = Mathf.FloorToInt(c.x * width);
-        int v = Mathf.FloorToInt(c.y * height);
-        int h = Mathf.FloorToInt(heightMap[u][v].r * numberOfHeightLayers);
+        int u = Mathf.FloorToInt(c.x * (width - 1));
+        int v = Mathf.FloorToInt(c.y * (height - 1));
+        int h = Mathf.CeilToInt(heightMap[u][v].r * numberOfHeightLayers);
         
         return new Node(posReal * (1 + 0.001f * i * heightScale), c , h, i, i + 1);
     }

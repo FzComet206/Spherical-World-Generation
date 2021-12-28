@@ -65,10 +65,10 @@ MonoBehaviour:
       octaves: 5
       gain: 0.3
       lacunarity: 1.5
-      altitudeTurbulenceScale: 2300
+      altitudeTurbulenceScale: 1500
       altitudeTurbulenceAmplitude: 200
       altitudeToTemperatureWeight: 0.9
-      altitudeToHumidityWeight: 0.6
+      altitudeToHumidityWeight: 0.3
     biomes:
       humidityToTemperatureCurve:
         serializedVersion: 2
@@ -76,12 +76,21 @@ MonoBehaviour:
         - serializedVersion: 3
           time: 0
           value: 0
-          inSlope: 2
-          outSlope: 2
+          inSlope: 4.0702558
+          outSlope: 4.0702558
           tangentMode: 0
           weightedMode: 0
           inWeight: 0
-          outWeight: 0
+          outWeight: 0.031063462
+        - serializedVersion: 3
+          time: 0.36760187
+          value: 0.81177014
+          inSlope: 1.0160784
+          outSlope: 1.0160784
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.33333334
         - serializedVersion: 3
           time: 1
           value: 1
@@ -96,78 +105,86 @@ MonoBehaviour:
         m_RotationOrder: 4
       curveRes: 1024
       biomes:
-      - name: 
+      - name: Desert
         heightCurve:
           serializedVersion: 2
           m_Curve: []
           m_PreInfinity: 0
           m_PostInfinity: 0
           m_RotationOrder: 0
-        colorCode: {r: 0, g: 0, b: 0, a: 0}
-      - name: 
+        colorCode: {r: 1, g: 0.598849, b: 0.2028302, a: 0}
+      - name: Plains
         heightCurve:
           serializedVersion: 2
           m_Curve: []
           m_PreInfinity: 0
           m_PostInfinity: 0
           m_RotationOrder: 0
-        colorCode: {r: 0, g: 0, b: 0, a: 0}
-      - name: 
+        colorCode: {r: 0.5558553, g: 1, b: 0, a: 0}
+      - name: Poles
         heightCurve:
           serializedVersion: 2
           m_Curve: []
           m_PreInfinity: 0
           m_PostInfinity: 0
           m_RotationOrder: 0
-        colorCode: {r: 0, g: 0, b: 0, a: 0}
-      - name: 
+        colorCode: {r: 0, g: 1, b: 0.9712162, a: 0}
+      - name: Savanna
         heightCurve:
           serializedVersion: 2
           m_Curve: []
           m_PreInfinity: 0
           m_PostInfinity: 0
           m_RotationOrder: 0
-        colorCode: {r: 0, g: 0, b: 0, a: 0}
-      - name: 
+        colorCode: {r: 1, g: 0.99068856, b: 0, a: 0}
+      - name: Rocky
         heightCurve:
           serializedVersion: 2
           m_Curve: []
           m_PreInfinity: 0
           m_PostInfinity: 0
           m_RotationOrder: 0
-        colorCode: {r: 0, g: 0, b: 0, a: 0}
-      - name: 
+        colorCode: {r: 0.5849056, g: 0.5849056, b: 0.5849056, a: 0}
+      - name: Tundra
         heightCurve:
           serializedVersion: 2
           m_Curve: []
           m_PreInfinity: 0
           m_PostInfinity: 0
           m_RotationOrder: 0
-        colorCode: {r: 0, g: 0, b: 0, a: 0}
-      - name: 
+        colorCode: {r: 0.25, g: 1, b: 0.672101, a: 0}
+      - name: Forest
         heightCurve:
           serializedVersion: 2
           m_Curve: []
           m_PreInfinity: 0
           m_PostInfinity: 0
           m_RotationOrder: 0
-        colorCode: {r: 0, g: 0, b: 0, a: 0}
-      - name: 
+        colorCode: {r: 0.056453932, g: 0.6226415, b: 0, a: 0}
+      - name: RainForest
         heightCurve:
           serializedVersion: 2
           m_Curve: []
           m_PreInfinity: 0
           m_PostInfinity: 0
           m_RotationOrder: 0
-        colorCode: {r: 0, g: 0, b: 0, a: 0}
-      - name: 
+        colorCode: {r: 0.04553453, g: 0.3773585, b: 0, a: 0}
+      - name: Swamp
         heightCurve:
           serializedVersion: 2
           m_Curve: []
           m_PreInfinity: 0
           m_PostInfinity: 0
           m_RotationOrder: 0
-        colorCode: {r: 0, g: 0, b: 0, a: 0}
+        colorCode: {r: 0.31132078, g: 0.21944058, b: 0.14831792, a: 0}
+      - name: Ocean
+        heightCurve:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 0
+          m_PostInfinity: 0
+          m_RotationOrder: 0
+        colorCode: {r: 0, g: 0.27892852, b: 1, a: 0}
   player: {fileID: 5259392167957853920, guid: 45aebc22877b8474b9992acce4a72dea, type: 3}
 --- !u!114 &2259064609053305316
 MonoBehaviour:
@@ -211,7 +228,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c153e106d5f78a44b6acafb03f1b3f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  heightScale: 1
-  numberOfHeightLayers: 10
-  cliffHeight: 0.001
+  heightScale: 5
+  numberOfHeightLayers: 2
+  cliffHeight: 0.01
   vertexArrInitialCount: 30000
