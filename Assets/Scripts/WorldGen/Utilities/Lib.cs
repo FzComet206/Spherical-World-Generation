@@ -86,7 +86,7 @@ public static class Lib
 
         public Vector2 ToUV()
         {
-            return new Vector2((longitude + PI) / (2 * PI), (latitude + PI / 2) / PI);
+            return new Vector2((longitude + PI) / (2f * PI), (latitude + PI / 2f) / PI);
         }
     }
     

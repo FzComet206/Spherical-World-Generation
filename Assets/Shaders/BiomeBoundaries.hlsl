@@ -2,6 +2,7 @@
 #ifndef BIOMEBOUNDARIES_INCLUDED 
 #define BIOMEBOUNDARIES_INCLUDED
 
+
 void ParseBounds_float(
     float t, float h, float t1, float t2, float t3, float t4, float t5, float t6,
     float h8, float h9, float h10, float h11, float h12, float h13,
@@ -19,6 +20,13 @@ void ParseBounds_float(
     else if (h < h10) i = forest;
     else if (t < t6) i = swamp;
     else i = rainForest;
+}
+
+void CalculateUV_float(float3 pos, out float2 uv)
+{
+    float latitude = asin(pos.y);
+    float longitude = atan2(pos.x, -pos.z);
+    uv = float2((longitude + 3.14159265) / (2. * 3.14159265), (latitude + 3.14159265 / 2.) / 3.14159265);
 }
 
 void ParseBounds2_float(

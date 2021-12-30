@@ -47,26 +47,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MeshSettings:
-    planeRes: 128
+    planeRes: 256
     numSubdivisions: 16
     generateAll: 1
     RenderDistance: 1
   WorldConfig:
     tex:
       compute: {fileID: 7200000, guid: c632a5e22c5e15c49b88fe8aa6944205, type: 3}
-      texWidth: 4096
-      texHeight: 2048
+      texWidth: 2048
+      texHeight: 1024
     noise:
-      seed0: 0
-      seed1: 0
-      seed2: 0
-      seed3: 0
+      seed0: 872
+      seed1: 45
+      seed2: 374
+      seed3: 133
       scale: 2300
       octaves: 5
       gain: 0.3
       lacunarity: 1.5
-      altitudeTurbulenceScale: 1500
-      altitudeTurbulenceAmplitude: 200
+      altitudeTurbulenceScale: 2000
+      altitudeTurbulenceAmplitude: 150
       altitudeToTemperatureWeight: 0.9
       altitudeToHumidityWeight: 0.3
     biomes:
@@ -228,7 +228,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c153e106d5f78a44b6acafb03f1b3f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  heightScale: 5
-  numberOfHeightLayers: 2
-  cliffHeight: 0.01
+  heightScale: 3
+  numberOfHeightLayers: 15
+  cliffHeight: 0.02
   vertexArrInitialCount: 30000

@@ -66,8 +66,8 @@ public class MeshThread : MonoBehaviour
         float dx = (endT.x - startT.x) / (res - 1);
         float dy = (endT.y - startT.y) / (res - 1);
 
-        int width = heightMap.Length - 1;
-        int height = heightMap[0].Length - 1;
+        int width = heightMap.Length;
+        int height = heightMap[0].Length;
 
         int numVertex = 0;
 
@@ -100,7 +100,6 @@ public class MeshThread : MonoBehaviour
                             topLeft, topRight, bottomRight, bottomLeft);
                         numVertex = march.March(vertArr, uvArr, numVertex, cliffHeight);
                     }
-                    
                     tx += dx;
                 }
                 ty += dy;
@@ -111,7 +110,6 @@ public class MeshThread : MonoBehaviour
         Vector3[] verticies = new Vector3[numVertex];
         Vector2[] uvs = new Vector2[numVertex];
 
-        
         Array.Copy(vertArr, verticies, numVertex);
         Array.Copy(uvArr, uvs, numVertex);
         
@@ -171,12 +169,13 @@ public class MeshThread : MonoBehaviour
 
     private Node InitializePoints(DataTypes.ChunkConfig config, Vector3 face, float tx, float ty, int width, int height, int i)
     {
-        Vector3 pos = face + (tx - 0.5f) * 2 * config.axisA + (ty - 0.5f) * 2 * config.axisB;
+        Vector3 pos = face + (tx - 0.5f) * 2f * config.axisA + (ty - 0.5f) * 2f * config.axisB;
         Vector3 posReal= Lib.PointOnCubeToPointOnSphere(pos);
         Vector2 c = Lib.PointToCoordinate(posReal).ToUV();
+
         int u = Mathf.FloorToInt(c.x * (width - 1));
         int v = Mathf.FloorToInt(c.y * (height - 1));
-        int h = Mathf.CeilToInt(heightMap[u][v].r * numberOfHeightLayers);
+        int h = Mathf.FloorToInt(heightMap[u][v].r * numberOfHeightLayers);
         
         return new Node(posReal * (1 + 0.001f * i * heightScale), c , h, i, i + 1);
     }

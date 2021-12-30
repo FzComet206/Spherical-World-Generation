@@ -73,12 +73,12 @@ float fbm(float3 x)
 void NoiseGenerator (uint3 id : SV_DispatchThreadID)
 {
     // this generate main height
-    float p = 3.14159265358979323846;
-    float _x = remap(id.x, 0, width - 1, 0, 1);
-    float _y = remap(id.y, 0, height - 1, 0, 1);
+    static const float p = 3.14159265f;
+    float _x = remap(id.x, 0, width - 1, 0, (width - 1) / (float) width);
+    float _y = remap(id.y, 0, height - 1, 0, (width - 1) / (float) width);
 
     // forgot why i would multiply this by 2048 but whatever
-    float3 v = latLongToPoint((_y * p) - p / 2, (_x * p * 2) - p) * 2048;
+    float3 v = latLongToPoint((_y * p) - p / 2.0, (_x * p * 2.0) - p) * 2048;
     
     float3 large = float3(v.x + randSeed1, v.y + randSeed1, v.z + randSeed1);
     float3 medium = float3(v.x + randSeed2, v.y + randSeed2, v.z + randSeed2);
