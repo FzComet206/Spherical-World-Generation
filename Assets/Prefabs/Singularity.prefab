@@ -47,20 +47,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MeshSettings:
-    planeRes: 256
+    planeRes: 128
     numSubdivisions: 16
     generateAll: 1
-    RenderDistance: 1
+    RenderDistance: 2
   WorldConfig:
     tex:
       compute: {fileID: 7200000, guid: c632a5e22c5e15c49b88fe8aa6944205, type: 3}
-      texWidth: 2048
-      texHeight: 1024
+      texWidth: 4096
+      texHeight: 2048
     noise:
-      seed0: 872
-      seed1: 45
-      seed2: 374
-      seed3: 133
+      seed0: 654
+      seed1: 784
+      seed2: 342
+      seed3: 912
       scale: 2300
       octaves: 5
       gain: 0.3
@@ -70,121 +70,258 @@ MonoBehaviour:
       altitudeToTemperatureWeight: 0.9
       altitudeToHumidityWeight: 0.3
     biomes:
-      humidityToTemperatureCurve:
-        serializedVersion: 2
-        m_Curve:
-        - serializedVersion: 3
-          time: 0
-          value: 0
-          inSlope: 4.0702558
-          outSlope: 4.0702558
-          tangentMode: 0
-          weightedMode: 0
-          inWeight: 0
-          outWeight: 0.031063462
-        - serializedVersion: 3
-          time: 0.36760187
-          value: 0.81177014
-          inSlope: 1.0160784
-          outSlope: 1.0160784
-          tangentMode: 0
-          weightedMode: 0
-          inWeight: 0.33333334
-          outWeight: 0.33333334
-        - serializedVersion: 3
-          time: 1
-          value: 1
-          inSlope: 0
-          outSlope: 0
-          tangentMode: 0
-          weightedMode: 0
-          inWeight: 0
-          outWeight: 0
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      curveRes: 1024
+      curveRes: 2048
       biomes:
-      - name: Desert
+      - name: pole
         heightCurve:
           serializedVersion: 2
-          m_Curve: []
-          m_PreInfinity: 0
-          m_PostInfinity: 0
+          m_Curve:
+          - serializedVersion: 3
+            time: 0
+            value: 0
+            inSlope: 1
+            outSlope: 1
+            tangentMode: 34
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          - serializedVersion: 3
+            time: 1
+            value: 1
+            inSlope: 1
+            outSlope: 1
+            tangentMode: 34
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
           m_RotationOrder: 0
-        colorCode: {r: 1, g: 0.598849, b: 0.2028302, a: 0}
-      - name: Plains
+      - name: tundra
         heightCurve:
           serializedVersion: 2
-          m_Curve: []
-          m_PreInfinity: 0
-          m_PostInfinity: 0
+          m_Curve:
+          - serializedVersion: 3
+            time: 0
+            value: 0
+            inSlope: 1
+            outSlope: 1
+            tangentMode: 34
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          - serializedVersion: 3
+            time: 1
+            value: 1
+            inSlope: 1
+            outSlope: 1
+            tangentMode: 34
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
           m_RotationOrder: 0
-        colorCode: {r: 0.5558553, g: 1, b: 0, a: 0}
-      - name: Poles
+      - name: taiga
         heightCurve:
           serializedVersion: 2
-          m_Curve: []
-          m_PreInfinity: 0
-          m_PostInfinity: 0
+          m_Curve:
+          - serializedVersion: 3
+            time: 0
+            value: 0
+            inSlope: 1
+            outSlope: 1
+            tangentMode: 34
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          - serializedVersion: 3
+            time: 1
+            value: 1
+            inSlope: 1
+            outSlope: 1
+            tangentMode: 34
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
           m_RotationOrder: 0
-        colorCode: {r: 0, g: 1, b: 0.9712162, a: 0}
-      - name: Savanna
+      - name: plains
         heightCurve:
           serializedVersion: 2
-          m_Curve: []
-          m_PreInfinity: 0
-          m_PostInfinity: 0
+          m_Curve:
+          - serializedVersion: 3
+            time: 0
+            value: 0
+            inSlope: 1
+            outSlope: 1
+            tangentMode: 34
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          - serializedVersion: 3
+            time: 1
+            value: 1
+            inSlope: 1
+            outSlope: 1
+            tangentMode: 34
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
           m_RotationOrder: 0
-        colorCode: {r: 1, g: 0.99068856, b: 0, a: 0}
-      - name: Rocky
+      - name: desert
         heightCurve:
           serializedVersion: 2
-          m_Curve: []
-          m_PreInfinity: 0
-          m_PostInfinity: 0
+          m_Curve:
+          - serializedVersion: 3
+            time: 0
+            value: 0
+            inSlope: 1
+            outSlope: 1
+            tangentMode: 34
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          - serializedVersion: 3
+            time: 1
+            value: 1
+            inSlope: 1
+            outSlope: 1
+            tangentMode: 34
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
           m_RotationOrder: 0
-        colorCode: {r: 0.5849056, g: 0.5849056, b: 0.5849056, a: 0}
-      - name: Tundra
+      - name: rocky
         heightCurve:
           serializedVersion: 2
-          m_Curve: []
-          m_PreInfinity: 0
-          m_PostInfinity: 0
+          m_Curve:
+          - serializedVersion: 3
+            time: 0
+            value: 0
+            inSlope: 1
+            outSlope: 1
+            tangentMode: 34
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          - serializedVersion: 3
+            time: 1
+            value: 1
+            inSlope: 1
+            outSlope: 1
+            tangentMode: 34
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
           m_RotationOrder: 0
-        colorCode: {r: 0.25, g: 1, b: 0.672101, a: 0}
-      - name: Forest
+      - name: savanna
         heightCurve:
           serializedVersion: 2
-          m_Curve: []
-          m_PreInfinity: 0
-          m_PostInfinity: 0
+          m_Curve:
+          - serializedVersion: 3
+            time: 0
+            value: 0
+            inSlope: 1
+            outSlope: 1
+            tangentMode: 34
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          - serializedVersion: 3
+            time: 1
+            value: 1
+            inSlope: 1
+            outSlope: 1
+            tangentMode: 34
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
           m_RotationOrder: 0
-        colorCode: {r: 0.056453932, g: 0.6226415, b: 0, a: 0}
-      - name: RainForest
+      - name: forest
         heightCurve:
           serializedVersion: 2
-          m_Curve: []
-          m_PreInfinity: 0
-          m_PostInfinity: 0
+          m_Curve:
+          - serializedVersion: 3
+            time: 0
+            value: 0
+            inSlope: 1
+            outSlope: 1
+            tangentMode: 34
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          - serializedVersion: 3
+            time: 1
+            value: 1
+            inSlope: 1
+            outSlope: 1
+            tangentMode: 34
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
           m_RotationOrder: 0
-        colorCode: {r: 0.04553453, g: 0.3773585, b: 0, a: 0}
       - name: Swamp
         heightCurve:
           serializedVersion: 2
-          m_Curve: []
-          m_PreInfinity: 0
-          m_PostInfinity: 0
+          m_Curve:
+          - serializedVersion: 3
+            time: 0
+            value: 0
+            inSlope: 1
+            outSlope: 1
+            tangentMode: 34
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          - serializedVersion: 3
+            time: 1
+            value: 1
+            inSlope: 1
+            outSlope: 1
+            tangentMode: 34
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
           m_RotationOrder: 0
-        colorCode: {r: 0.31132078, g: 0.21944058, b: 0.14831792, a: 0}
-      - name: Ocean
+      - name: rainforest
         heightCurve:
           serializedVersion: 2
-          m_Curve: []
-          m_PreInfinity: 0
-          m_PostInfinity: 0
+          m_Curve:
+          - serializedVersion: 3
+            time: 0
+            value: 0
+            inSlope: 1
+            outSlope: 1
+            tangentMode: 34
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          - serializedVersion: 3
+            time: 1
+            value: 1
+            inSlope: 1
+            outSlope: 1
+            tangentMode: 34
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
           m_RotationOrder: 0
-        colorCode: {r: 0, g: 0.27892852, b: 1, a: 0}
   player: {fileID: 5259392167957853920, guid: 45aebc22877b8474b9992acce4a72dea, type: 3}
 --- !u!114 &2259064609053305316
 MonoBehaviour:
@@ -228,7 +365,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c153e106d5f78a44b6acafb03f1b3f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  heightScale: 3
-  numberOfHeightLayers: 15
-  cliffHeight: 0.02
+  heightScale: 2
+  numberOfHeightLayers: 20
+  cliffHeight: 0.01
   vertexArrInitialCount: 30000

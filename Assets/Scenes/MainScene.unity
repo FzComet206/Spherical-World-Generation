@@ -431,9 +431,453 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 466752993, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
+      propertyPath: cliffHeight
+      value: 0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 466752993, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
+      propertyPath: numberOfHeightLayers
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 466752993, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
+      propertyPath: vertexArrInitialCount
+      value: 50000
+      objectReference: {fileID: 0}
     - target: {fileID: 2195358137158845682, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
       propertyPath: MeshSettings.planeRes
-      value: 128
+      value: 512
+      objectReference: {fileID: 0}
+    - target: {fileID: 2195358137158845682, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
+      propertyPath: WorldConfig.noise.seed0
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2195358137158845682, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
+      propertyPath: WorldConfig.noise.seed1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2195358137158845682, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
+      propertyPath: WorldConfig.noise.seed2
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2195358137158845682, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
+      propertyPath: WorldConfig.noise.seed3
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2195358137158845682, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
+      propertyPath: MeshSettings.generateAll
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2195358137158845682, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
+      propertyPath: WorldConfig.tex.texWidth
+      value: 4096
+      objectReference: {fileID: 0}
+    - target: {fileID: 2195358137158845682, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
+      propertyPath: WorldConfig.tex.texHeight
+      value: 2048
+      objectReference: {fileID: 0}
+    - target: {fileID: 2195358137158845682, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
+      propertyPath: MeshSettings.RenderDistance
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2195358137158845682, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
+      propertyPath: WorldConfig.biomes.curveRes
+      value: 2048
+      objectReference: {fileID: 0}
+    - target: {fileID: 2195358137158845682, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
+      propertyPath: MeshSettings.numSubdivisions
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 2195358137158845682, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
+      propertyPath: WorldConfig.biomes.biomes.Array.data[1].heightCurve.m_Curve.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2195358137158845682, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
+      propertyPath: WorldConfig.biomes.biomes.Array.data[2].heightCurve.m_Curve.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2195358137158845682, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
+      propertyPath: WorldConfig.biomes.biomes.Array.data[1].heightCurve.m_Curve.Array.data[1].time
+      value: 0.38271007
+      objectReference: {fileID: 0}
+    - target: {fileID: 2195358137158845682, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
+      propertyPath: WorldConfig.biomes.biomes.Array.data[1].heightCurve.m_Curve.Array.data[2].time
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2195358137158845682, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
+      propertyPath: WorldConfig.biomes.biomes.Array.data[2].heightCurve.m_Curve.Array.data[1].time
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2195358137158845682, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
+      propertyPath: WorldConfig.biomes.biomes.Array.data[2].heightCurve.m_Curve.Array.data[2].time
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2195358137158845682, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
+      propertyPath: WorldConfig.biomes.biomes.Array.data[0].heightCurve.m_Curve.Array.data[0].value
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2195358137158845682, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
+      propertyPath: WorldConfig.biomes.biomes.Array.data[0].heightCurve.m_Curve.Array.data[1].value
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2195358137158845682, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
+      propertyPath: WorldConfig.biomes.biomes.Array.data[1].heightCurve.m_Curve.Array.data[0].value
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2195358137158845682, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
+      propertyPath: WorldConfig.biomes.biomes.Array.data[1].heightCurve.m_Curve.Array.data[1].value
+      value: 0.44676846
+      objectReference: {fileID: 0}
+    - target: {fileID: 2195358137158845682, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
+      propertyPath: WorldConfig.biomes.biomes.Array.data[1].heightCurve.m_Curve.Array.data[2].value
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2195358137158845682, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
+      propertyPath: WorldConfig.biomes.biomes.Array.data[2].heightCurve.m_Curve.Array.data[0].value
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2195358137158845682, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
+      propertyPath: WorldConfig.biomes.biomes.Array.data[2].heightCurve.m_Curve.Array.data[1].value
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2195358137158845682, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
+      propertyPath: WorldConfig.biomes.biomes.Array.data[2].heightCurve.m_Curve.Array.data[2].value
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2195358137158845682, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
+      propertyPath: WorldConfig.biomes.biomes.Array.data[3].heightCurve.m_Curve.Array.data[0].value
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2195358137158845682, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
+      propertyPath: WorldConfig.biomes.biomes.Array.data[3].heightCurve.m_Curve.Array.data[1].value
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2195358137158845682, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
+      propertyPath: WorldConfig.biomes.biomes.Array.data[4].heightCurve.m_Curve.Array.data[0].value
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2195358137158845682, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
+      propertyPath: WorldConfig.biomes.biomes.Array.data[4].heightCurve.m_Curve.Array.data[1].value
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2195358137158845682, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
+      propertyPath: WorldConfig.biomes.biomes.Array.data[5].heightCurve.m_Curve.Array.data[0].value
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2195358137158845682, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
+      propertyPath: WorldConfig.biomes.biomes.Array.data[6].heightCurve.m_Curve.Array.data[0].value
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2195358137158845682, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
+      propertyPath: WorldConfig.biomes.biomes.Array.data[6].heightCurve.m_Curve.Array.data[1].value
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2195358137158845682, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
+      propertyPath: WorldConfig.biomes.biomes.Array.data[7].heightCurve.m_Curve.Array.data[1].value
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2195358137158845682, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
+      propertyPath: WorldConfig.biomes.biomes.Array.data[8].heightCurve.m_Curve.Array.data[0].value
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2195358137158845682, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
+      propertyPath: WorldConfig.biomes.biomes.Array.data[8].heightCurve.m_Curve.Array.data[1].value
+      value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 2195358137158845682, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
+      propertyPath: WorldConfig.biomes.biomes.Array.data[9].heightCurve.m_Curve.Array.data[0].value
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2195358137158845682, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
+      propertyPath: WorldConfig.biomes.biomes.Array.data[9].heightCurve.m_Curve.Array.data[1].value
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 2195358137158845682, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
+      propertyPath: WorldConfig.biomes.biomes.Array.data[0].heightCurve.m_Curve.Array.data[0].inSlope
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2195358137158845682, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
+      propertyPath: WorldConfig.biomes.biomes.Array.data[0].heightCurve.m_Curve.Array.data[1].inSlope
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2195358137158845682, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
+      propertyPath: WorldConfig.biomes.biomes.Array.data[1].heightCurve.m_Curve.Array.data[0].inSlope
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2195358137158845682, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
+      propertyPath: WorldConfig.biomes.biomes.Array.data[1].heightCurve.m_Curve.Array.data[1].inSlope
+      value: 0.6808
+      objectReference: {fileID: 0}
+    - target: {fileID: 2195358137158845682, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
+      propertyPath: WorldConfig.biomes.biomes.Array.data[2].heightCurve.m_Curve.Array.data[0].inSlope
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2195358137158845682, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
+      propertyPath: WorldConfig.biomes.biomes.Array.data[2].heightCurve.m_Curve.Array.data[1].inSlope
+      value: 0.06225984
+      objectReference: {fileID: 0}
+    - target: {fileID: 2195358137158845682, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
+      propertyPath: WorldConfig.biomes.biomes.Array.data[2].heightCurve.m_Curve.Array.data[2].inSlope
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2195358137158845682, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
+      propertyPath: WorldConfig.biomes.biomes.Array.data[3].heightCurve.m_Curve.Array.data[0].inSlope
+      value: 0.099999994
+      objectReference: {fileID: 0}
+    - target: {fileID: 2195358137158845682, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
+      propertyPath: WorldConfig.biomes.biomes.Array.data[3].heightCurve.m_Curve.Array.data[1].inSlope
+      value: 0.099999994
+      objectReference: {fileID: 0}
+    - target: {fileID: 2195358137158845682, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
+      propertyPath: WorldConfig.biomes.biomes.Array.data[4].heightCurve.m_Curve.Array.data[0].inSlope
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2195358137158845682, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
+      propertyPath: WorldConfig.biomes.biomes.Array.data[4].heightCurve.m_Curve.Array.data[1].inSlope
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2195358137158845682, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
+      propertyPath: WorldConfig.biomes.biomes.Array.data[5].heightCurve.m_Curve.Array.data[0].inSlope
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2195358137158845682, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
+      propertyPath: WorldConfig.biomes.biomes.Array.data[5].heightCurve.m_Curve.Array.data[1].inSlope
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2195358137158845682, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
+      propertyPath: WorldConfig.biomes.biomes.Array.data[6].heightCurve.m_Curve.Array.data[0].inSlope
+      value: 0.10000001
+      objectReference: {fileID: 0}
+    - target: {fileID: 2195358137158845682, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
+      propertyPath: WorldConfig.biomes.biomes.Array.data[6].heightCurve.m_Curve.Array.data[1].inSlope
+      value: 0.10000001
+      objectReference: {fileID: 0}
+    - target: {fileID: 2195358137158845682, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
+      propertyPath: WorldConfig.biomes.biomes.Array.data[7].heightCurve.m_Curve.Array.data[0].inSlope
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2195358137158845682, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
+      propertyPath: WorldConfig.biomes.biomes.Array.data[7].heightCurve.m_Curve.Array.data[1].inSlope
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2195358137158845682, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
+      propertyPath: WorldConfig.biomes.biomes.Array.data[8].heightCurve.m_Curve.Array.data[0].inSlope
+      value: 0.050000004
+      objectReference: {fileID: 0}
+    - target: {fileID: 2195358137158845682, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
+      propertyPath: WorldConfig.biomes.biomes.Array.data[8].heightCurve.m_Curve.Array.data[1].inSlope
+      value: 0.050000004
+      objectReference: {fileID: 0}
+    - target: {fileID: 2195358137158845682, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
+      propertyPath: WorldConfig.biomes.biomes.Array.data[9].heightCurve.m_Curve.Array.data[0].inSlope
+      value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 2195358137158845682, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
+      propertyPath: WorldConfig.biomes.biomes.Array.data[9].heightCurve.m_Curve.Array.data[1].inSlope
+      value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 2195358137158845682, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
+      propertyPath: WorldConfig.biomes.biomes.Array.data[0].heightCurve.m_Curve.Array.data[0].outSlope
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2195358137158845682, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
+      propertyPath: WorldConfig.biomes.biomes.Array.data[0].heightCurve.m_Curve.Array.data[1].inWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 2195358137158845682, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
+      propertyPath: WorldConfig.biomes.biomes.Array.data[0].heightCurve.m_Curve.Array.data[1].outSlope
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2195358137158845682, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
+      propertyPath: WorldConfig.biomes.biomes.Array.data[1].heightCurve.m_Curve.Array.data[0].outSlope
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2195358137158845682, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
+      propertyPath: WorldConfig.biomes.biomes.Array.data[1].heightCurve.m_Curve.Array.data[1].inWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 2195358137158845682, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
+      propertyPath: WorldConfig.biomes.biomes.Array.data[1].heightCurve.m_Curve.Array.data[1].outSlope
+      value: 0.6808
+      objectReference: {fileID: 0}
+    - target: {fileID: 2195358137158845682, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
+      propertyPath: WorldConfig.biomes.biomes.Array.data[2].heightCurve.m_Curve.Array.data[0].outSlope
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2195358137158845682, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
+      propertyPath: WorldConfig.biomes.biomes.Array.data[2].heightCurve.m_Curve.Array.data[1].inWeight
+      value: 0.3628205
+      objectReference: {fileID: 0}
+    - target: {fileID: 2195358137158845682, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
+      propertyPath: WorldConfig.biomes.biomes.Array.data[2].heightCurve.m_Curve.Array.data[1].outSlope
+      value: 0.06225984
+      objectReference: {fileID: 0}
+    - target: {fileID: 2195358137158845682, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
+      propertyPath: WorldConfig.biomes.biomes.Array.data[2].heightCurve.m_Curve.Array.data[2].outSlope
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2195358137158845682, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
+      propertyPath: WorldConfig.biomes.biomes.Array.data[3].heightCurve.m_Curve.Array.data[0].outSlope
+      value: 0.099999994
+      objectReference: {fileID: 0}
+    - target: {fileID: 2195358137158845682, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
+      propertyPath: WorldConfig.biomes.biomes.Array.data[3].heightCurve.m_Curve.Array.data[1].inWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 2195358137158845682, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
+      propertyPath: WorldConfig.biomes.biomes.Array.data[3].heightCurve.m_Curve.Array.data[1].outSlope
+      value: 0.099999994
+      objectReference: {fileID: 0}
+    - target: {fileID: 2195358137158845682, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
+      propertyPath: WorldConfig.biomes.biomes.Array.data[4].heightCurve.m_Curve.Array.data[0].outSlope
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2195358137158845682, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
+      propertyPath: WorldConfig.biomes.biomes.Array.data[4].heightCurve.m_Curve.Array.data[1].inWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 2195358137158845682, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
+      propertyPath: WorldConfig.biomes.biomes.Array.data[4].heightCurve.m_Curve.Array.data[1].outSlope
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2195358137158845682, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
+      propertyPath: WorldConfig.biomes.biomes.Array.data[5].heightCurve.m_Curve.Array.data[0].outSlope
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2195358137158845682, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
+      propertyPath: WorldConfig.biomes.biomes.Array.data[5].heightCurve.m_Curve.Array.data[1].outSlope
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2195358137158845682, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
+      propertyPath: WorldConfig.biomes.biomes.Array.data[6].heightCurve.m_Curve.Array.data[0].outSlope
+      value: 0.10000001
+      objectReference: {fileID: 0}
+    - target: {fileID: 2195358137158845682, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
+      propertyPath: WorldConfig.biomes.biomes.Array.data[6].heightCurve.m_Curve.Array.data[1].inWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 2195358137158845682, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
+      propertyPath: WorldConfig.biomes.biomes.Array.data[6].heightCurve.m_Curve.Array.data[1].outSlope
+      value: 0.10000001
+      objectReference: {fileID: 0}
+    - target: {fileID: 2195358137158845682, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
+      propertyPath: WorldConfig.biomes.biomes.Array.data[7].heightCurve.m_Curve.Array.data[0].outSlope
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2195358137158845682, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
+      propertyPath: WorldConfig.biomes.biomes.Array.data[7].heightCurve.m_Curve.Array.data[1].inWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 2195358137158845682, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
+      propertyPath: WorldConfig.biomes.biomes.Array.data[7].heightCurve.m_Curve.Array.data[1].outSlope
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2195358137158845682, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
+      propertyPath: WorldConfig.biomes.biomes.Array.data[8].heightCurve.m_Curve.Array.data[0].outSlope
+      value: 0.050000004
+      objectReference: {fileID: 0}
+    - target: {fileID: 2195358137158845682, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
+      propertyPath: WorldConfig.biomes.biomes.Array.data[8].heightCurve.m_Curve.Array.data[1].inWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 2195358137158845682, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
+      propertyPath: WorldConfig.biomes.biomes.Array.data[8].heightCurve.m_Curve.Array.data[1].outSlope
+      value: 0.050000004
+      objectReference: {fileID: 0}
+    - target: {fileID: 2195358137158845682, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
+      propertyPath: WorldConfig.biomes.biomes.Array.data[9].heightCurve.m_Curve.Array.data[0].outSlope
+      value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 2195358137158845682, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
+      propertyPath: WorldConfig.biomes.biomes.Array.data[9].heightCurve.m_Curve.Array.data[1].inWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 2195358137158845682, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
+      propertyPath: WorldConfig.biomes.biomes.Array.data[9].heightCurve.m_Curve.Array.data[1].outSlope
+      value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 2195358137158845682, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
+      propertyPath: WorldConfig.biomes.biomes.Array.data[0].heightCurve.m_Curve.Array.data[0].outWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 2195358137158845682, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
+      propertyPath: WorldConfig.biomes.biomes.Array.data[1].heightCurve.m_Curve.Array.data[1].outWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 2195358137158845682, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
+      propertyPath: WorldConfig.biomes.biomes.Array.data[2].heightCurve.m_Curve.Array.data[1].outWeight
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2195358137158845682, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
+      propertyPath: WorldConfig.biomes.biomes.Array.data[3].heightCurve.m_Curve.Array.data[0].outWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 2195358137158845682, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
+      propertyPath: WorldConfig.biomes.biomes.Array.data[4].heightCurve.m_Curve.Array.data[0].outWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 2195358137158845682, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
+      propertyPath: WorldConfig.biomes.biomes.Array.data[6].heightCurve.m_Curve.Array.data[0].outWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 2195358137158845682, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
+      propertyPath: WorldConfig.biomes.biomes.Array.data[7].heightCurve.m_Curve.Array.data[0].outWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 2195358137158845682, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
+      propertyPath: WorldConfig.biomes.biomes.Array.data[8].heightCurve.m_Curve.Array.data[0].outWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 2195358137158845682, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
+      propertyPath: WorldConfig.biomes.biomes.Array.data[9].heightCurve.m_Curve.Array.data[0].outWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 2195358137158845682, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
+      propertyPath: WorldConfig.biomes.biomes.Array.data[0].heightCurve.m_Curve.Array.data[0].tangentMode
+      value: 34
+      objectReference: {fileID: 0}
+    - target: {fileID: 2195358137158845682, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
+      propertyPath: WorldConfig.biomes.biomes.Array.data[0].heightCurve.m_Curve.Array.data[1].tangentMode
+      value: 34
+      objectReference: {fileID: 0}
+    - target: {fileID: 2195358137158845682, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
+      propertyPath: WorldConfig.biomes.biomes.Array.data[1].heightCurve.m_Curve.Array.data[0].tangentMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2195358137158845682, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
+      propertyPath: WorldConfig.biomes.biomes.Array.data[1].heightCurve.m_Curve.Array.data[1].tangentMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2195358137158845682, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
+      propertyPath: WorldConfig.biomes.biomes.Array.data[2].heightCurve.m_Curve.Array.data[0].tangentMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2195358137158845682, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
+      propertyPath: WorldConfig.biomes.biomes.Array.data[2].heightCurve.m_Curve.Array.data[1].tangentMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2195358137158845682, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
+      propertyPath: WorldConfig.biomes.biomes.Array.data[5].heightCurve.m_Curve.Array.data[0].tangentMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2195358137158845682, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
+      propertyPath: WorldConfig.biomes.biomes.Array.data[5].heightCurve.m_Curve.Array.data[1].tangentMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2195358137158845682, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
+      propertyPath: WorldConfig.biomes.biomes.Array.data[7].heightCurve.m_Curve.Array.data[0].tangentMode
+      value: 34
+      objectReference: {fileID: 0}
+    - target: {fileID: 2195358137158845682, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
+      propertyPath: WorldConfig.biomes.biomes.Array.data[7].heightCurve.m_Curve.Array.data[1].tangentMode
+      value: 34
+      objectReference: {fileID: 0}
+    - target: {fileID: 2195358137158845682, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
+      propertyPath: WorldConfig.biomes.biomes.Array.data[9].heightCurve.m_Curve.Array.data[0].tangentMode
+      value: 34
+      objectReference: {fileID: 0}
+    - target: {fileID: 2195358137158845682, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
+      propertyPath: WorldConfig.biomes.biomes.Array.data[9].heightCurve.m_Curve.Array.data[1].tangentMode
+      value: 34
       objectReference: {fileID: 0}
     - target: {fileID: 2259064609053305316, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
       propertyPath: seaParent
@@ -443,6 +887,10 @@ PrefabInstance:
       propertyPath: meshParent
       value: 
       objectReference: {fileID: 754006412}
+    - target: {fileID: 2259064609053305316, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
+      propertyPath: meshMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 3ee0402ab02d7994ba4f7113cef700ce, type: 2}
     - target: {fileID: 3497322506244145624, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
       propertyPath: m_Name
       value: Singularity

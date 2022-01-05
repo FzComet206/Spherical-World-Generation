@@ -6,6 +6,9 @@ using Object = UnityEngine.Object;
 
 public static class Lib
 {
+    public static float remap(float v, float minOld, float maxOld, float minNew, float maxNew) {
+        return Clamp01(minNew + (v-minOld) * (maxNew - minNew) / (maxOld-minOld));
+    }
     public static Vector3 PointOnCubeToPointOnSphere(Vector3 p)
     {
         float x2 = p.x * p.x / 2;

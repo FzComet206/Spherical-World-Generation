@@ -143,7 +143,7 @@ public class MeshHelper: MonoBehaviour
                 meshThread.RequestMapData(OnChunkDataReceived, genCullConfig[x]);
             }
         }
-
+        
         foreach (var v in meshDictionary)
         {
             if (!l.Contains(v.Key))
@@ -170,7 +170,7 @@ public class MeshHelper: MonoBehaviour
 
     public void UpdateHeightMap()
     {
-        Texture2D tex = Lib.ReadFromPng(Configurations.dirPathProximity);
+        Texture2D tex = Lib.ReadFromPng(Configurations.dirPathHeight);
         meshThread.heightMap = new Color[tex.width][];
         for (int i = 0; i < tex.width; i++)
         {
@@ -202,8 +202,6 @@ public class MeshHelper: MonoBehaviour
 
         obj.transform.parent = meshParent;
         meshDictionary[data.index] = obj;
-        
-        
         
         Mesh sea = new Mesh();
         sea.indexFormat = IndexFormat.UInt32;

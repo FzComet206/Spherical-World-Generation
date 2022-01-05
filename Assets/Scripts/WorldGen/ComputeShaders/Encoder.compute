@@ -1,10 +1,6 @@
 #pragma kernel NoiseGenerator
-#pragma kernel BiomeGenerator
+#pragma kernel HeightGenerator
 #include "noiseSimplex.cginc"
-
-// data buffers
-RWStructuredBuffer<float> HtoTCurveSample;
-RWStructuredBuffer<float4> BiomeColors;
 
 // first iteration output
 RWTexture2D<float4> ContinentMap;
@@ -15,9 +11,8 @@ RWTexture2D<float4> Elevation;
 // second iteration output
 RWTexture2D<float4> Temperature;
 RWTexture2D<float4> Humidity;
-
-// final output
-RWTexture2D<float4> BiomeMap;
+RWTexture2D<float4> HeightMap;
+RWStructuredBuffer<float> BiomeCurves;
 
 // texture and base noise settings
 int randSeed1;
@@ -35,9 +30,23 @@ float lacunarity;
 int altitudeScale;
 int altitudeAmplitude;
 
-int HtoTCurveRes;
+int CurveRes;
 float AtoTWeight;
 float AtoHWeight;
+
+// biome boundaries here
+float t1;
+float t2;
+float t3;
+float t4;
+float t5;
+float t6;
+float h8;
+float h9;
+float h10;
+float h11;
+float h12;
+float h13;
 
 float remap(float v, float minOld, float maxOld, float minNew, float maxNew) {
     return saturate(minNew + (v-minOld) * (maxNew - minNew) / (maxOld-minOld));
@@ -51,6 +60,13 @@ float3 latLongToPoint(float latitude, float longitude) {
     float z = -cos(longitude) * r;
 
     return float3(x, y, z);
+}
+
+float2 CalculateUV(float3 pos)
+{
+    float latitude = asin(pos.y);
+    float longitude = atan2(pos.x, -pos.z);
+    return float2((longitude + 3.14159265) / (2. * 3.14159265), (latitude + 3.14159265 / 2.) / 3.14159265);
 }
 
 float fbm(float3 x)
@@ -70,7 +86,7 @@ float fbm(float3 x)
 }
 
 [numthreads(16,16,1)]
-void NoiseGenerator (uint3 id : SV_DispatchThreadID)
+void NoiseGenerator (uint3 id : sv_dispatchthreadid)
 {
     // this generate main height
     static const float p = 3.14159265f;
@@ -148,47 +164,35 @@ void NoiseGenerator (uint3 id : SV_DispatchThreadID)
     Humidity[id.xy] = float4(h, h, h, 1);
 }
 
-// have to split kernels for more than 8 buffers
-
 [numthreads(16,16,1)]
-void BiomeGenerator(uint3 id : SV_DispatchThreadID)
+void HeightGenerator(uint3 id : sv_dispatchthreadid)
 {
-    float c = ContinentMap[id.xy].r;
+    static const float p = 3.14159265f;
+    float _x = remap(id.x, 0, width - 1, 0, (width - 1) / (float) width);
+    float _y = remap(id.y, 0, height - 1, 0, (width - 1) / (float) width);
+    float3 v = latLongToPoint((_y * p) - p / 2.0, (_x * p * 2.0) - p) * 2048;
+    float3 scaled = float3(v.x + randSeed3, v.y + randSeed3, v.z + randSeed3);
+    float a = (fbm(scaled / scale * 6) + 1) / 2;
+
+    int sample = (int) (a * ((float) CurveRes - 1));
+    
+    float encode; 
     float t = Temperature[id.xy].r;
     float h = Humidity[id.xy].r;
     
-    // sample humidity at current temperature
-    float corr = HtoTCurveSample[(int) (t * HtoTCurveRes) - 1];
-    
-    // logical min-terms for encoding biome
-    int desert = step(0.55, t) * step(h, 0.6) * c;
-    int plains = step(t, 0.55) * step(0.4, t) * step(h, 0.6) * c;
-    int poles = step(t, 0.3) * step(h, corr) * step(h, 0.35) * c + step(corr, h) * c;
-    
-    int savanna = step(0.65, t) * step(0.6, h) * step(h, 0.75) * c;
-    int rocky = step(0.45, t) * step(t, 0.65) * step(h, 0.75) * step(0.6, h) * c;
-    
-    // the bounds for tundra is the conjunction of three bounds
-    int tundra = step(t, 0.3) * step(0.35, h) * step(h, corr) * c +
-        step(0.3, t) * step(t, 0.4) * step(h, corr) * c +
-            step(0.4, t) * step(t, 0.45) * step(0.6, h) * step(h, corr) * c;
-    
-    int forest = step(0.45, t) * step(0.75, h) * step(h, 0.86) * c;
-    int rainForest = step(0.86, t) * step(0.86, h) * step(h, corr) * c;
-    int swamp = step(0.45, t) * step(t, 0.86) * step(0.86, h) * step(h, corr) * c;
+    if (t < t1 && h < h13) encode = BiomeCurves[sample];
+    else if (t < t2 && h < h12) encode = BiomeCurves[sample + CurveRes];
+    else if (t < t3 && h8 <= h && h < h11) encode = BiomeCurves[sample + CurveRes * 2];
+    else if (t < t4 && h < h8) encode = BiomeCurves[sample + CurveRes * 3];
+    else if (h < h8) encode = BiomeCurves[sample + CurveRes * 4];
+    else if (t < t5 && h8 <= h && h < h9) encode = BiomeCurves[sample + CurveRes * 5];
+    else if (h8 <= h && h < h9) encode = BiomeCurves[sample + CurveRes * 6];
+    else if (h < h10) encode = BiomeCurves[sample + CurveRes * 7];
+    else if (t < t6) encode = BiomeCurves[sample + CurveRes * 8];
+    else encode = BiomeCurves[sample + CurveRes * 9];;
 
-    float4 color =
-        BiomeColors[0] * desert +
-            BiomeColors[1] * plains +
-                BiomeColors[2] * poles +
-                BiomeColors[3] * savanna +
-                    BiomeColors[4] * rocky +
-                        BiomeColors[5] * tundra +
-                            BiomeColors[6] * forest +
-                                BiomeColors[7] * rainForest +
-                                    BiomeColors[8] * swamp;
-    color.a = 1;
-    BiomeMap[id.xy] = color;
+    encode = encode * remap(Proximity[id.xy], 0, 1, 0.5, 1) * ContinentMap[id.xy];
+    HeightMap[id.xy] = float4(encode, 1, 1, 1); 
 }
 
     

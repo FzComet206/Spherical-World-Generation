@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq.Expressions;
 using System.Threading;
 using UnityEngine;
 
@@ -170,7 +169,7 @@ public class MeshThread : MonoBehaviour
     private Node InitializePoints(DataTypes.ChunkConfig config, Vector3 face, float tx, float ty, int width, int height, int i)
     {
         Vector3 pos = face + (tx - 0.5f) * 2f * config.axisA + (ty - 0.5f) * 2f * config.axisB;
-        Vector3 posReal= Lib.PointOnCubeToPointOnSphere(pos);
+        Vector3 posReal = Lib.PointOnCubeToPointOnSphere(pos);
         Vector2 c = Lib.PointToCoordinate(posReal).ToUV();
 
         int u = Mathf.FloorToInt(c.x * (width - 1));

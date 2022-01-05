@@ -35,7 +35,6 @@ public static class DataTypes
     [Serializable]
     public struct BiomeConfig
     {
-        public AnimationCurve humidityToTemperatureCurve;
         public int curveRes;
         public List<Biome> biomes;
     } 
@@ -61,7 +60,6 @@ public static class DataTypes
     {
         public string name;
         public AnimationCurve heightCurve;
-        public Color colorCode;
     }
     
     [Serializable]

@@ -1,4 +1,7 @@
+using System;
+using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.Experimental.Rendering;
 
 public class ComputeHelper : MonoBehaviour
 {
@@ -7,19 +10,6 @@ public class ComputeHelper : MonoBehaviour
         // shader instance
         ComputeShader noises = config.tex.compute;
         
-        // data buffers
-        ComputeBuffer HToTCurveSample =
-            Lib.SampleCurveToBuffer(config.biomes.humidityToTemperatureCurve, config.biomes.curveRes);
-        
-        int colorCount = config.biomes.biomes.Count;
-        ComputeBuffer BiomeColor = new ComputeBuffer(colorCount, sizeof(float) * 4); 
-        Color[] colors = new Color[colorCount];
-        for (int i = 0; i < colorCount; i++)
-        {
-            colors[i] = config.biomes.biomes[i].colorCode;
-        }
-        BiomeColor.SetData(colors);
-
         // first iteration output
         RenderTexture continentMap = new RenderTexture(config.tex.texWidth, config.tex.texHeight, 1) {enableRandomWrite = true};
         RenderTexture altitudeMap = new RenderTexture(config.tex.texWidth, config.tex.texHeight, 1) {enableRandomWrite = true};
@@ -36,13 +26,27 @@ public class ComputeHelper : MonoBehaviour
         temperatureMap.Create();
         humidityMap.Create();
         
-        // final output
-        RenderTexture biomeMap = new RenderTexture(config.tex.texWidth, config.tex.texHeight, 1) {enableRandomWrite = true};
-        biomeMap.Create();
+        RenderTexture heightMap = new RenderTexture(config.tex.texWidth, config.tex.texHeight, 1) {enableRandomWrite = true};
+        heightMap.Create();
+
+        // sample all the curves into one array and pass into gpu
+        int res = config.biomes.curveRes;
+        int l = config.biomes.biomes.Count;
+        float[] allBiomeCurves = new float[res * l];
+        for (int i = 0; i < config.biomes.biomes.Count; i++)
+        {
+            for (int j = 0; j < res; j++)
+            {
+                allBiomeCurves[i * res + j] = config.biomes.biomes[i].heightCurve.Evaluate(j / (float) res);
+            }
+        }
         
+        ComputeBuffer biomeCurves = new ComputeBuffer(res * l, sizeof(float));
+        biomeCurves.SetData(allBiomeCurves);
+
         // set data
         int handle = noises.FindKernel("NoiseGenerator");
-        int handle1 = noises.FindKernel("BiomeGenerator");
+        int handle1 = noises.FindKernel("HeightGenerator");
         
         noises.SetTexture(handle, "Elevation", elevationMap);
         noises.SetTexture(handle, "ContinentMap", continentMap);
@@ -50,9 +54,6 @@ public class ComputeHelper : MonoBehaviour
         noises.SetTexture(handle, "Proximity", proximityMap);
         noises.SetTexture(handle, "Temperature", temperatureMap);
         noises.SetTexture(handle, "Humidity", humidityMap);
-        
-        noises.SetBuffer(handle1, "HtoTCurveSample", HToTCurveSample);
-        noises.SetBuffer(handle1, "BiomeColors", BiomeColor);
         
         // texture and noises settings
         noises.SetInt("randSeed1", config.noise.seed0);
@@ -69,24 +70,42 @@ public class ComputeHelper : MonoBehaviour
         noises.SetInt("altitudeAmplitude", config.noise.altitudeTurbulenceAmplitude);
         noises.SetFloat("AtoTWeight", config.noise.altitudeToTemperatureWeight);
         noises.SetFloat("AtoHWeight", config.noise.altitudeToHumidityWeight);
-        noises.SetInt("HtoTCurveRes", config.biomes.curveRes);
+        noises.SetInt("CurveRes", config.biomes.curveRes);
+        
+        noises.SetFloat("t1", 0.1f);
+        noises.SetFloat("t2", 0.25f);
+        noises.SetFloat("t3", 0.5f);
+        noises.SetFloat("t4", 0.5f);
+        noises.SetFloat("t5", 0.7f);
+        noises.SetFloat("t6", 0.75f);
+        noises.SetFloat("h8", 0.5f);
+        noises.SetFloat("h9", 0.6f);
+        noises.SetFloat("h10", 0.75f);
+        noises.SetFloat("h11", 1f);
+        noises.SetFloat("h12", 1f);
+        noises.SetFloat("h13", 1f);
         
         // brrrrr
         noises.Dispatch(handle, config.tex.texWidth / 16, config.tex.texHeight / 16, 1);
         
-        HToTCurveSample.Dispose();
-        BiomeColor.Dispose();
+        noises.SetBuffer(handle1, "BiomeCurves", biomeCurves);
+        noises.SetTexture(handle1, "Proximity", proximityMap);
+        noises.SetTexture(handle1, "ContinentMap", continentMap);
+        noises.SetTexture(handle1, "Temperature", temperatureMap);
+        noises.SetTexture(handle1, "Humidity", humidityMap);
+        noises.SetTexture(handle1, "HeightMap", heightMap);
         
+        noises.Dispatch(handle1, config.tex.texWidth / 16, config.tex.texHeight / 16, 1);
+        
+        biomeCurves.Dispose();
         // save
         Lib.DumpRenderTexture(continentMap, Configurations.dirPathContinent, TextureFormat.RGBA32);
         Lib.DumpRenderTexture(altitudeMap, Configurations.dirPathAltitude, TextureFormat.RGBA32);
         Lib.DumpRenderTexture(proximityMap, Configurations.dirPathProximity, TextureFormat.RGBA32);
-        
-        Lib.DumpRenderTexture(temperatureMap, Configurations.dirPathTemerature, TextureFormat.RGBA32);
-        Lib.DumpRenderTexture(humidityMap, Configurations.dirPathHumidity, TextureFormat.RGBA32);
-        
         Lib.DumpRenderTexture(elevationMap, Configurations.dirPathElevation, TextureFormat.RGBA32);
-        Lib.DumpRenderTexture(biomeMap, Configurations.dirPathBiomes, TextureFormat.RGBA32);
+        Lib.DumpRenderTexture(temperatureMap, Configurations.dirPathTemerature, TextureFormat.R16);
+        Lib.DumpRenderTexture(humidityMap, Configurations.dirPathHumidity, TextureFormat.R16);
+        Lib.DumpRenderTexture(heightMap, Configurations.dirPathHeight, TextureFormat.R16);
     }
     
 }
