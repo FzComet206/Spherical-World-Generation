@@ -32,4 +32,4 @@ Now i will briefly go over how to generate a similar biome
 
 There are of course many different ways implement a procedurally generated biome system. I can generate a biome straight out of noise, or using rapid exploring random trees, or using control points. I created the biome through emergence. The idea is that we create a humidity map, and then a temperature map. Then we define the biome types according to those values.
 
-<img src="diagram.jpeg" alt="drawing" width="500"/>
+<img src="diagram.jpeg" alt="drawing" width="400" margin-left="auto" marin-right="auto"/>
