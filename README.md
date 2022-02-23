@@ -6,4 +6,4 @@
 Here is a screenshot of what the generated world look like.
 
 
-![An example of generated world](https://github.com/FzComet206/Spherical-World-Generation/Assets/Generated/World.png?raw=true)
+![An example of generated world](https://github.com/FzComet206/Spherical-World-Generation/blob/master//Assets/Generated/World.png?raw=true)
