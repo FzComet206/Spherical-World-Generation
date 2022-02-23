@@ -6,3 +6,21 @@
 Here is a screenshot of what the generated world look like.
 
 ![An example of generated world](World.png)
+
+
+I will briefly go over the procedures for generating a world like this
+
+Regarding mesh verticies, what the program does is it generate a cube with six planes, each plane has a resolution, and each plane can be subdivided. If we normalize all the vectors on the cube, the verticies will form a sphere. To deal with a uneven distribution of the verticies on the sphere, a transformation is used.
+
+![Cube World!!!][CubeWorld.png]
+
+
+In order to make a culling of the generated mesh, each plane is divided into smaller subplanes. I define each subplane as a chunk of the mesh. In a coroutine, the chunks nearest the camera is appended into a queue alone with a callback. 
+
+Each chunk in the queue is then processed over multiple threads. Each thread samples the height values through a height texture (which is not very precise), triangulate the verticies through marching square algorithm with multiple passes (which is not very efficient), and return the verticies and triangles alone with the callback.
+
+Since the callback is in Unity's main thread, it takes the data and construct a mesh, and renders it. There is a boolean called "generate all". If true, the program will generate all the chunks over many threads and ignore the culling process. If false, the program will only generate nearby chunks. 
+
+**If you want to "generate all", please make sure you set the plane resolution to no higher than 512 so that your computer doesn't explode**.
+
+![With culling][Chunks.png]
