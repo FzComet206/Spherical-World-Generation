@@ -36,7 +36,7 @@ Note that all textures and noises below are the results of a compute shader in u
 
 There are of course many different ways implement a procedurally generated biome system. I can generate a biome straight out of noise, or using rapid exploring random trees, or using control points. I created the biome through emergence. The idea is that we create a humidity map, and then a temperature map. Then we define the biome types according to those values.
 
-<p align="center"> <img src="diagram.jpg" alt="diagram" width="400"/> </>
+<p align="center"> <img src="diagram.jpeg" alt="diagram" width="400"/> </>
 
 
 To construct a humidity map and a temperature map, i first constructed following textures:
@@ -76,11 +76,11 @@ Next up the the proximity map. I define a proximity map as to how close a point 
 
 Here is the output
 
-![Proximity](proximity.png)
+![Proximity](Proximity.png)
 
 Next up is a fairly simple one. I defined the height map to just represent the elevations of each point. Here is the output.
 
-![Height map](HeightMap.png)
+![Height map](Elevation.png)
 
 
 Now we finished construcing all the necessary input maps. Let's take a look at temperature map.
