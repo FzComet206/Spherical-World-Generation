@@ -1,6 +1,6 @@
 # Spherical World and Biome Generation
 
-#### Hello, this is an attempt at making a prcedurally generated sphreical world. The code in this project are not meant to be refactored and concise, as i no longer work on this branch. So please be aware of the unconventional practices and spaghetti-ness in this project, you have been warned! I am now working on a better version of this project could potentionally develop it into an procedurally generated sandbox/survival-ish game.
+#### Hello, this is an attempt at making a prcedurally generated sphreical world. The code in this project are not meant to be refactored and concise, as i no longer work on this branch. So please be aware of the unconventional practices and spaghetti-ness in this project. You have been warned! I am now working on a better version of this project and could potentionally develop it into an procedurally generated sandbox/survival-ish game.
 
 
 Here is a screenshot of what a fully generated world look like.
@@ -113,4 +113,23 @@ Here is the output
 
 ![Humidity](Humidity.png)
 
+---
 
+Now we have a humidity map and a temperature map, we can specify biomes according to each biome's humidity and temperature threshold. In unity, i wrote custom function in shader graph that took all the biome threshold and colors as input, and output the biome color depending on the temperature and humidity values. This draws biomes represented by colors on the sphere.
+
+To make the shader precise and consistent, i changed the encoding of the two textures to R16 instead of 8 bits. The temperature and humidity maps can be linearly interpolated in the shader, thus making the biome boundary more smooth instead of pixalated.
+
+
+Here is an example of a biome that is supposed to be desert (orange) surrounded by other biomes (black)
+
+![Desert](Desert.png)
+
+
+The material and shader take the boundaries and color of each biome as input, and renders it on the sphere. They are adjustab
+
+<p align="center"> <img src="Threshold.jpeg" alt="Boundaries" width="300"/> </>
+
+
+---
+
+Next up are the height values at each vertex
