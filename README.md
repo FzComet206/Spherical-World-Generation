@@ -78,6 +78,7 @@ Here is the output
 
 ![Proximity](Proximity.png)
 
+
 Next up is a fairly simple one. I defined the height map to just represent the elevations of each point. Here is the output.
 
 ![Height map](Elevation.png)
@@ -85,6 +86,31 @@ Next up is a fairly simple one. I defined the height map to just represent the e
 
 Now we finished construcing all the necessary input maps. Let's take a look at temperature map.
 
+Here is the basic idea:
 
+- foreach pixel, sample the corresponding pixel in the altitude map. Higher values (close to equator) means higher temperature, vice versa.
+
+- foreach pixel, sample the corresponding pixel in the proximity map. Higher values (far from ocean) means the temperature skew to both ends (0.8 is like 0.9, and 0.3 is like 0.1)
+
+- foreach pixel, sample the corresponding pixel in the height map. Higher values (high elevation) means lower temperature.
+
+- adjust the specific weights for each samples and add them together, thus form a temperature map. 
+
+Here is the output
+
+![Temperature](Temperature.png)
+
+
+And lastly the humidity map using similar methods above:
+
+- higher altitude means lower humidity
+
+- higher proximity means lower humidity
+
+- higher elevation means lower humidity
+
+Here is the output
+
+![Humidity](Humidity.png)
 
 
