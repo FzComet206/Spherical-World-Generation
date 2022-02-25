@@ -11,22 +11,22 @@ public class ComputeHelper : MonoBehaviour
         ComputeShader noises = config.tex.compute;
         
         // first iteration output
-        RenderTexture continentMap = new RenderTexture(config.tex.texWidth, config.tex.texHeight, 1) {enableRandomWrite = true};
-        RenderTexture altitudeMap = new RenderTexture(config.tex.texWidth, config.tex.texHeight, 1) {enableRandomWrite = true};
-        RenderTexture proximityMap = new RenderTexture(config.tex.texWidth, config.tex.texHeight, 1) {enableRandomWrite = true};
-        RenderTexture elevationMap = new RenderTexture(config.tex.texWidth, config.tex.texHeight, 1) {enableRandomWrite = true};
+        RenderTexture continentMap = new RenderTexture(config.tex.texWidth, config.tex.texHeight, 1, RenderTextureFormat.R16) {enableRandomWrite = true};
+        RenderTexture altitudeMap = new RenderTexture(config.tex.texWidth, config.tex.texHeight, 1, RenderTextureFormat.R16) {enableRandomWrite = true};
+        RenderTexture proximityMap = new RenderTexture(config.tex.texWidth, config.tex.texHeight, 1, RenderTextureFormat.R16) {enableRandomWrite = true};
+        RenderTexture elevationMap = new RenderTexture(config.tex.texWidth, config.tex.texHeight, 1, RenderTextureFormat.R16) {enableRandomWrite = true};
         continentMap.Create();
         altitudeMap.Create();
         proximityMap.Create();
         elevationMap.Create();
         
         // second iteration output
-        RenderTexture temperatureMap = new RenderTexture(config.tex.texWidth, config.tex.texHeight, 1) {enableRandomWrite = true};
-        RenderTexture humidityMap = new RenderTexture(config.tex.texWidth, config.tex.texHeight, 1) {enableRandomWrite = true};
+        RenderTexture temperatureMap = new RenderTexture(config.tex.texWidth, config.tex.texHeight, 1, RenderTextureFormat.R16) {enableRandomWrite = true};
+        RenderTexture humidityMap = new RenderTexture(config.tex.texWidth, config.tex.texHeight, 1, RenderTextureFormat.R16) {enableRandomWrite = true};
         temperatureMap.Create();
         humidityMap.Create();
         
-        RenderTexture heightMap = new RenderTexture(config.tex.texWidth, config.tex.texHeight, 1) {enableRandomWrite = true};
+        RenderTexture heightMap = new RenderTexture(config.tex.texWidth, config.tex.texHeight, 1, RenderTextureFormat.R16) {enableRandomWrite = true};
         heightMap.Create();
 
         // sample all the curves into one array and pass into gpu
@@ -86,7 +86,7 @@ public class ComputeHelper : MonoBehaviour
         noises.SetFloat("h13", 1f);
         
         // brrrrr
-        noises.Dispatch(handle, config.tex.texWidth / 16, config.tex.texHeight / 16, 1);
+        noises.Dispatch(handle, config.tex.texWidth / 8, config.tex.texHeight / 8, 1);
         
         noises.SetBuffer(handle1, "BiomeCurves", biomeCurves);
         noises.SetTexture(handle1, "Proximity", proximityMap);
@@ -95,14 +95,14 @@ public class ComputeHelper : MonoBehaviour
         noises.SetTexture(handle1, "Humidity", humidityMap);
         noises.SetTexture(handle1, "HeightMap", heightMap);
         
-        noises.Dispatch(handle1, config.tex.texWidth / 16, config.tex.texHeight / 16, 1);
+        noises.Dispatch(handle1, config.tex.texWidth / 8, config.tex.texHeight / 8, 1);
         
         biomeCurves.Dispose();
         // save
-        Lib.DumpRenderTexture(continentMap, Configurations.dirPathContinent, TextureFormat.RGBA32);
-        Lib.DumpRenderTexture(altitudeMap, Configurations.dirPathAltitude, TextureFormat.RGBA32);
-        Lib.DumpRenderTexture(proximityMap, Configurations.dirPathProximity, TextureFormat.RGBA32);
-        Lib.DumpRenderTexture(elevationMap, Configurations.dirPathElevation, TextureFormat.RGBA32);
+        Lib.DumpRenderTexture(continentMap, Configurations.dirPathContinent, TextureFormat.R16);
+        Lib.DumpRenderTexture(altitudeMap, Configurations.dirPathAltitude, TextureFormat.R16);
+        Lib.DumpRenderTexture(proximityMap, Configurations.dirPathProximity, TextureFormat.R16);
+        Lib.DumpRenderTexture(elevationMap, Configurations.dirPathElevation, TextureFormat.R16);
         Lib.DumpRenderTexture(temperatureMap, Configurations.dirPathTemerature, TextureFormat.R16);
         Lib.DumpRenderTexture(humidityMap, Configurations.dirPathHumidity, TextureFormat.R16);
         Lib.DumpRenderTexture(heightMap, Configurations.dirPathHeight, TextureFormat.R16);

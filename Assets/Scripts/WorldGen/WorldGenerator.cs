@@ -15,7 +15,6 @@ public class WorldGenerator : MonoBehaviour
 
     private void Start()
     {
-        s = Stopwatch.StartNew();
         meshHelper = FindObjectOfType<MeshHelper>();
         computeHelper = FindObjectOfType<ComputeHelper>();
         

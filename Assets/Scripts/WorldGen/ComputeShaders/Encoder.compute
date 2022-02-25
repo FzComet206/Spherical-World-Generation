@@ -85,7 +85,7 @@ float fbm(float3 x)
     return value;
 }
 
-[numthreads(16,16,1)]
+[numthreads(8,8,1)]
 void NoiseGenerator (uint3 id : sv_dispatchthreadid)
 {
     // this generate main height
@@ -164,7 +164,7 @@ void NoiseGenerator (uint3 id : sv_dispatchthreadid)
     Humidity[id.xy] = float4(h, h, h, 1);
 }
 
-[numthreads(16,16,1)]
+[numthreads(8,8,1)]
 void HeightGenerator(uint3 id : sv_dispatchthreadid)
 {
     static const float p = 3.14159265f;
@@ -191,7 +191,7 @@ void HeightGenerator(uint3 id : sv_dispatchthreadid)
     else if (t < t6) encode = BiomeCurves[sample + CurveRes * 8];
     else encode = BiomeCurves[sample + CurveRes * 9];;
 
-    encode = encode * remap(Proximity[id.xy], 0, 1, 0.5, 1) * ContinentMap[id.xy];
+    encode = encode * remap(Proximity[id.xy].r, 0, 1, 0.5, 1) * ContinentMap[id.xy].r;
     HeightMap[id.xy] = float4(encode, 1, 1, 1); 
 }
 
