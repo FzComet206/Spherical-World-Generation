@@ -204,7 +204,7 @@ Finally we have the "World". There are different seeds in the inspector, you can
 
 #### There could be an ocean shader, some atmosphere shader, better lighting, and maybe a better planet with marching cubes algorithm "with overhang mountains and ocean terrains), along with a lot better implementation and less spaghetti. And that is what i am working on next. I plan to build the next project into a actual program that can be run on windows and mac machines, and it would be like a very simple sandbox or survival-ish game, with a heavy focus on environment and procedural contents. The player would just swing arond the globe with a hook gun and explore.
 
-#### My inspiration come from youtuber Sabastian Lague, and i used a little bit of code from his project, so check out his channel.
+#### My inspiration come from the youtuber named Sabastian Lague, and i used a little bit of his code, go check out his channel!
 
 ---
 
