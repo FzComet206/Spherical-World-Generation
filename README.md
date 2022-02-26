@@ -25,9 +25,8 @@ Since the callback is in Unity's main thread, it takes the data and construct a 
 
 **If you want to "generate all", please make sure you set the plane resolution to no higher than 512 so that your computer doesn't explode**.
 
-![With culling](Imgs/Chunks.gif)
+<p align="center"> <img src="Imgs/Chunks.gif" alt="Chunks" width="800"/> </>
 
----
 ---
 
 Now i will briefly go over how to generate a similar biome
@@ -135,7 +134,7 @@ Here is an example of a biome that is supposed to be desert (orange) surrounded 
 
 The material uses a shader that takes temperature and humidity threshold values and color of each biome as input, and renders it on the sphere. These boundaries can be adjusted during runtime as shown in the gif.
 
-<p align="center"> <img src="Imgs/Thresholds.gif" alt="Boundaries" width="1000"/> </>
+<p align="center"> <img src="Imgs/Thresholds.gif" alt="Boundaries" width="800"/> </>
 
 ---
 
