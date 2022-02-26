@@ -138,4 +138,26 @@ The material uses a shader that takes temperature and humidity threshold values 
 
 ---
 
-Next up are the height values at each vertex
+Next up are the height values at each vertex.
+
+In this project's implementation of mesh gerenration algorithm, I use height map based approach for encoding terrains. There are downside to this approach, such as the lack of overhangs and vertical cliffs. However, since the mesh generation algorithm i used in this project is marching squares. I used some tricks to generate a vertical wall for some configurations of marching squares.
+
+To get the height values at each pixel, we first generate a M x N texture through compute shader, with each pixel's index remapped into longgitude and latitude. The coordinate is then transformed to positions on sphere as float3 (or vector 3). The position is then used to sample height values from a simplex noise library and fractsal brownian motions.
+
+Here is the generated height map
+
+![Height Map](HeightMap.png)
+
+---
+
+After the generation of heightmap is complete, the height map texture is then read into memory as a nested array. Then the array is accessed through threads. The value of the vertex position woule be something like finalVert = originalVert * (1 + height_scalar * height) where height scalar is a very small number like 0.001, and height is the corresponding noise value.
+
+There are 
+
+Here is one of the height map generated 
+
+![Squares](Imgs/squares.png)
+
+---
+
+
