@@ -146,15 +146,48 @@ To get the height values at each pixel, we first generate a M x N texture throug
 
 Here is the generated height map
 
-![Height Map](HeightMap.png)
+![Height Map](Imgs/HeightMap.png)
 
 ---
 
 After the generation of heightmap is complete, the height map texture is then read into memory as a nested array. Then the array is accessed through threads. The value of the vertex position woule be something like finalVert = originalVert * (1 + height_scalar * height) where height scalar is a very small number like 0.001, and height is the corresponding noise value.
 
-There are 
+There is one major problem with this approach. Since the heigh values at each vertex on a sphere is read from a rectangular texture, there are distortions as the verticies does not have a one to one mapping to texture indexes. 
 
-Here is one of the height map generated 
+There are two ways that i think of can solve this problem:
+
+- Move the noise calculations from gpu to cpu with multithreading, which could make things slower. But as a result, the noise values at each vertex would be accurate.
+
+- Use a large compute buffer to represent verticies on the sphere, and return the values back to cpu.
+
+The latter approach is better in practice. Even though i have not yet implemented this approach to this project, i have decided to use this approach in the project i'm currently working on.
+
+One thing that i would like to mention is that, since i found a way to define biome boundaries, there is also a way to apply different height curves and blend different height curves between the biomes. For example, the shrubland biomes can on average have a very high higher values, while the desert biome next to it can on average have a very low value. 
+
+The way i do it is to describe different biome's height curves as an animation curve. Where the first t axis is the input noise values, and the y axis is the height values given the actual noise value. After defining all the curves. I pre-sample all the curves in cpu code and combine it into one compute buffer, then generate height values according to the compute buffer in gpu side.
+
+There can also be blendings in between biomes, so that there is a smooth height and the values don't just have some sort of wierd discontinuity. In order to blend height values across biomes, i will have to blend them in humidity-temperature map space, since that is how the boimes are defines. For example, the points with humidity value close to one boundary, we can set the height to be equal to some portion of the current biome plus some portion of the neighboring biome. I did not implement this in this project yet, and i will do this the my upcoming project. 
+
+Here is an example of what a biome curve would look like.
+
+![Biome Curve](Imgs/Editor.png)
+
+---
+
+We have discussed the methods for generating verticies on sphere, use multi-threading to imprve proformance, use emergence method to generate a natural-looking biome. Lastly, i would like to briefly go over the mesh generation algorithm. I used marching squraes in order to have smoother edges and vertical walls. It might not be the best way to generate meshes, but i gave it a try and it looks ok.
+
+My specific implementations of marching squares in this project is not very optimized, and there are definitely better ways to do it. In addition to this marching square 
+
+Here is an image of the marching square configurations
+
+
+
+
+
+
+
+
+
 
 ![Squares](Imgs/squares.png)
 
