@@ -206,7 +206,10 @@ Finally we have the "World". There are different seeds in the inspector, you can
 
 #### My inspiration come from youtuber Sabastian Lague, and i used a little bit of code from his project, so check out his channel.
 
+---
 
+Feel free to add me on discord!
 
+![](https://dcbadge.vercel.app/api/shield/280385777664524288)
 
 
