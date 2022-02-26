@@ -25,7 +25,7 @@ Since the callback is in Unity's main thread, it takes the data and construct a 
 
 **If you want to "generate all", please make sure you set the plane resolution to no higher than 512 so that your computer doesn't explode**.
 
-![With culling](Imgs/Chunks.png)
+![With culling](Imgs/Chunks.gif)
 
 ---
 ---
