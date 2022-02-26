@@ -472,7 +472,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2195358137158845682, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
       propertyPath: MeshSettings.planeRes
-      value: 512
+      value: 256
       objectReference: {fileID: 0}
     - target: {fileID: 2195358137158845682, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
       propertyPath: WorldConfig.noise.seed0

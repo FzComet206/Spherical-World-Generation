@@ -127,7 +127,7 @@ Here is an example of a biome that is supposed to be desert (orange) surrounded 
 
 The material and shader take the boundaries and color of each biome as input, and renders it on the sphere. They are adjustab
 
-<p align="center"> <img src="Imgs/Threshold.png" alt="Boundaries" width="300"/> </>
+<p align="center"> <img src="Imgs/Thresholds.gif" alt="Boundaries" width="300"/> </>
 
 
 ---
