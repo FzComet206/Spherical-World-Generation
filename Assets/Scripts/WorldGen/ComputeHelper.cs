@@ -1,5 +1,6 @@
 using System;
 using Unity.Mathematics;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Experimental.Rendering;
 
@@ -106,6 +107,7 @@ public class ComputeHelper : MonoBehaviour
         Lib.DumpRenderTexture(temperatureMap, Configurations.dirPathTemerature, TextureFormat.R16);
         Lib.DumpRenderTexture(humidityMap, Configurations.dirPathHumidity, TextureFormat.R16);
         Lib.DumpRenderTexture(heightMap, Configurations.dirPathHeight, TextureFormat.R16);
+        AssetDatabase.Refresh();
     }
     
 }

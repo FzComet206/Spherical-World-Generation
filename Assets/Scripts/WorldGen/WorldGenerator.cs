@@ -17,6 +17,26 @@ public class WorldGenerator : MonoBehaviour
     {
         meshHelper = FindObjectOfType<MeshHelper>();
         computeHelper = FindObjectOfType<ComputeHelper>();
+
+        if (WorldConfig.tex.texHeight > 8192 || WorldConfig.tex.texWidth > 8192)
+        {
+            throw new Exception("Recommanded texture resolution is below 8192");
+        }
+        
+        if (MeshSettings.generateAll)
+        {
+            if (MeshSettings.planeRes > 512)
+            {
+                throw new Exception("Recommanded plane resolution when generate all is below 512");
+            }
+        }
+        else
+        {
+            if (MeshSettings.planeRes > 2048)
+            {
+                throw new Exception("Recommanded plane resolution with culling is below 2048");
+            }
+        }
         
         computeHelper.GenerateNoise(WorldConfig);
         meshHelper.UpdateHeightMap();

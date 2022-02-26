@@ -460,15 +460,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 466752993, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
       propertyPath: cliffHeight
-      value: 0.02
+      value: 0.03
       objectReference: {fileID: 0}
     - target: {fileID: 466752993, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
       propertyPath: heightScale
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 466752993, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
       propertyPath: numberOfHeightLayers
-      value: 20
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 466752993, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
       propertyPath: vertexArrInitialCount
@@ -476,7 +476,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2195358137158845682, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
       propertyPath: MeshSettings.planeRes
-      value: 1024
+      value: 256
       objectReference: {fileID: 0}
     - target: {fileID: 2195358137158845682, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
       propertyPath: WorldConfig.noise.seed0
@@ -496,19 +496,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2195358137158845682, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
       propertyPath: MeshSettings.generateAll
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2195358137158845682, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
       propertyPath: WorldConfig.tex.texWidth
-      value: 8192
-      objectReference: {fileID: 0}
-    - target: {fileID: 2195358137158845682, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
-      propertyPath: WorldConfig.tex.texHeight
       value: 4096
       objectReference: {fileID: 0}
     - target: {fileID: 2195358137158845682, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
+      propertyPath: WorldConfig.tex.texHeight
+      value: 2048
+      objectReference: {fileID: 0}
+    - target: {fileID: 2195358137158845682, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
       propertyPath: MeshSettings.RenderDistance
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2195358137158845682, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
       propertyPath: WorldConfig.biomes.curveRes
@@ -516,7 +516,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2195358137158845682, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
       propertyPath: MeshSettings.numSubdivisions
-      value: 32
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 2195358137158845682, guid: 228c5ddbb6545d0498c3d6be1971d3f0, type: 3}
       propertyPath: WorldConfig.biomes.biomes.Array.data[1].heightCurve.m_Curve.Array.size

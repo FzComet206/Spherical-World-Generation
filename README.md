@@ -35,7 +35,7 @@ Note that all textures and noises below are the results of a compute shader in u
 
 ---
 
-There are of course many different ways implement a procedurally generated biome system. I can generate a biome straight out of noise, or using rapid exploring random trees, or using control points. I created the biome through emergence. The idea is that we create a humidity map, and then a temperature map. Then we define the biome types according to those values.
+There are of course many different ways implement a procedurally generated biome system. I can generate a biome straight out of noise, or using rapid exploring random trees, or using biome control points. I created the biome through the concept of "emergence". The idea is that we create a humidity map, and then a temperature map. Then we define the biome types according to those values.
 
 <p align="center"> <img src="Imgs/diagram.jpeg" alt="diagram" width="800"/> </>
 
@@ -131,12 +131,15 @@ Here is an example of a biome that is supposed to be desert (orange) surrounded 
 
 ![Desert](Imgs/Desert.png)
 
+---
 
 The material uses a shader that takes temperature and humidity threshold values and color of each biome as input, and renders it on the sphere. These boundaries can be adjusted during runtime as shown in the gif.
 
 <p align="center"> <img src="Imgs/Thresholds.gif" alt="Boundaries" width="800"/> </>
 
 ---
+
+**if you deleted the textures in "generated" folder, they will be regenerated when you click on play button, but make sure to change the texture formate of humidity and temperature map to R16 for the correct biome boundaries.**
 
 Next up are the height values at each vertex.
 
@@ -174,23 +177,36 @@ Here is an example of what a biome curve would look like.
 
 ---
 
-We have discussed the methods for generating verticies on sphere, use multi-threading to imprve proformance, use emergence method to generate a natural-looking biome. Lastly, i would like to briefly go over the mesh generation algorithm. I used marching squraes in order to have smoother edges and vertical walls. It might not be the best way to generate meshes, but i gave it a try and it looks ok.
+We have discussed the methods for generating verticies on sphere, use multi-threading to improve proformance, use the "emergence" method to generate a natural-looking biome. Finally, i used marching squraes to define the triangles and verticies. I used marching squares because i wanted to have smoother edges and vertical walls. It might not be the best way to generate meshes, but i gave it a try and it looks ok. The better way of triangulating the meshes through this algorithm might be to use a triangulation table and do the computation in parallel with compute shader.
 
-My specific implementations of marching squares in this project is not very optimized, and there are definitely better ways to do it. In addition to this marching square 
 
 Here is an image of the marching square configurations
-
-
-
-
-
-
-
-
-
 
 ![Squares](Imgs/squares.png)
 
 ---
+
+And here are two images of marching square configurations with wireframe on
+
+![Wireframe](Imgs/Wireframe.png)
+
+---
+
+![Wireframe](Imgs/Wireframe2.png)
+
+---
+
+Finally we have the "World". There are different seeds in the inspector, you can change them to have a different world.
+
+![SimpleWorld](Imgs/SimpleWorld.png)
+
+---
+
+#### There could be an ocean shader, some atmosphere shader, better lighting, and maybe a better planet with marching cubes algorithm "with overhang mountains and ocean terrains), along with a lot better implementation and less spaghetti. And that is what i am working on next. I plan to build the next project into a actual program that can be run on windows and mac machines, and it would be like a very simple sandbox or survival-ish game, with a heavy focus on environment and procedural contents. The player would just swing arond the globe with a hook gun and explore.
+
+#### My inspiration come from youtuber Sabastian Lague, and i used a little bit of code from his project, so check out his channel.
+
+
+
 
 

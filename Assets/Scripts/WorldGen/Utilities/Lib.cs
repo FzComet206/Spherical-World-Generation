@@ -102,6 +102,7 @@ public static class Lib
         tex.ReadPixels (new Rect (0, 0, rt.width, rt.height), 0, 0);
         tex.Apply ();
         
+        
         File.WriteAllBytes(pngOutPath, tex.EncodeToPNG());
         RenderTexture.active = oldRT;
         Object.Destroy(tex);
@@ -110,8 +111,9 @@ public static class Lib
     public static Texture2D ReadFromPng(string path)
     {
         byte[] data =  File.ReadAllBytes(path);
-        Texture2D tex = new Texture2D(1, 1);
+        Texture2D tex = new Texture2D(1, 1, TextureFormat.R16, false);
         tex.LoadImage(data);
+        tex.Apply();
         return tex;
     }
     

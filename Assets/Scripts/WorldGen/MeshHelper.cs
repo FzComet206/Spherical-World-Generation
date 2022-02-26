@@ -239,8 +239,5 @@ public class MeshHelper: MonoBehaviour
             }
             yield return new WaitForEndOfFrame();
         }
-        
-        worldGen.s.Stop();
-        Debug.Log(worldGen.s.Elapsed);
     }
 }
